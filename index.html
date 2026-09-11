@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --yellow:#FFC700;--yellow-soft:#F9C846;--yellow-light:#FFE68C;--yellow-pale:#FFF3C4;
+  --yellow:#1800ad;--yellow-soft:#1800ad;--yellow-light:#E9E6FF;--yellow-pale:#F1EFFF;--blue-2:#2B17D9;--blue-tint:#8F82FF;
   --orange:#F56400;--orange2:#FF7D23;
   --text:#23282d;--body:#4a4a4a;--muted:#7b7b7b;--grey:#E6E6E6;--grey-bg:#F5F5F7;--input:#EFEFEF;
   --footer:#3D3D3D;--white:#fff;
@@ -43,8 +43,8 @@ b,strong{color:var(--text);font-weight:700}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:18px 26px;min-width:200px;border-radius:35px;font-family:var(--f);font-weight:600;font-size:15px;line-height:1.17;border:0;cursor:pointer;transition:.2s ease background,.2s ease box-shadow,.2s ease transform;white-space:nowrap;position:relative;z-index:1}
 .btn.orange{background:linear-gradient(90deg,#F56400 0%,#FF7D23 100%);color:#fff}
 .btn.orange:hover{background:linear-gradient(90deg,#F78333 0%,#FF964F 100%);box-shadow:0 14px 30px 0 rgba(246,103,4,.3)}
-.btn.yellow{background:var(--yellow);color:var(--text)}
-.btn.yellow:hover{background:#FFDD66;box-shadow:0 14px 30px 0 rgba(255,199,0,.3)}
+.btn.yellow{background:var(--yellow);color:#fff}
+.btn.yellow:hover{background:var(--blue-2);box-shadow:0 14px 30px 0 rgba(24,0,173,.3)}
 .btn.outline{background:transparent;border:1px solid var(--orange);color:var(--orange);padding:13px 25px;min-width:0}
 .btn.outline:hover{background:var(--orange);color:#fff}
 .btn.dark-outline{background:transparent;border:1px solid var(--text);color:var(--text);padding:13px 26px;min-width:0}
@@ -52,7 +52,7 @@ b,strong{color:var(--text);font-weight:700}
 
 /* decorations */
 .dots{position:absolute;width:150px;height:190px;pointer-events:none;background-image:radial-gradient(#D6D6D6 2.2px,transparent 2.8px);background-size:22px 22px;opacity:.9}
-.dots.y{background-image:radial-gradient(#FFC700 2.2px,transparent 2.8px)}
+.dots.y{background-image:radial-gradient(#1800ad 2.2px,transparent 2.8px)}
 .blob{position:absolute;pointer-events:none;background:var(--yellow-soft);border-radius:50%}
 .card{background:#fff;border:1px solid var(--grey);border-radius:var(--r);box-shadow:var(--shadow);padding:30px 32px}
 .card h3{margin-bottom:12px}
@@ -160,7 +160,7 @@ h1{font-size:clamp(30px,3.6vw,46px);line-height:1.2;margin-bottom:24px}
 .g2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
 .card.center{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px}
 .card.center h3{font-size:19px;max-width:360px}
-.honest{margin-top:24px;display:flex;gap:14px;align-items:flex-start;padding:18px 22px;border:1.5px dashed #E1C466;background:#FFFBEB;border-radius:16px;color:var(--body);font-size:15px}
+.honest{margin-top:24px;display:flex;gap:14px;align-items:flex-start;padding:18px 22px;border:1.5px dashed #B9B3F0;background:#F6F5FF;border-radius:16px;color:var(--body);font-size:15px}
 
 /* included */
 .inc{overflow:hidden}
@@ -177,7 +177,7 @@ h1{font-size:clamp(30px,3.6vw,46px);line-height:1.2;margin-bottom:24px}
 .result .lead{font-weight:600;color:var(--text);margin-bottom:16px}
 .result .diamond li{font-size:15.5px}
 .result .diamond li span{color:var(--body);font-weight:400}
-.result .foot{margin-top:16px;padding-top:14px;border-top:1px solid rgba(0,0,0,.1);font-size:14px;color:#5a5000}
+.result .foot{margin-top:16px;padding-top:14px;border-top:1px solid rgba(24,0,173,.15);font-size:14px;color:#3a2fa0}
 .illu{width:100%;height:auto;display:block}
 
 /* checklist */
@@ -190,7 +190,7 @@ h1{font-size:clamp(30px,3.6vw,46px);line-height:1.2;margin-bottom:24px}
 .acc details:last-child{border-bottom:0}
 .acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:18px;padding:20px 0;font-weight:700;font-size:17px;color:var(--text)}
 .acc summary::-webkit-details-marker{display:none}
-.acc summary .k{width:38px;height:38px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex:0 0 38px}
+.acc summary .k{width:38px;height:38px;border-radius:50%;background:var(--yellow);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex:0 0 38px}
 .acc summary .c{margin-left:auto;font-size:13px;color:var(--muted);font-weight:500;white-space:nowrap}
 .acc summary .pl{flex:0 0 32px;height:32px;border-radius:50%;border:1px solid var(--grey);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--text);transition:.2s}
 .acc details[open] summary .pl{background:linear-gradient(135deg,#F56400,#FF7D23);color:#fff;border-color:transparent;transform:rotate(45deg)}
@@ -215,16 +215,16 @@ h1{font-size:clamp(30px,3.6vw,46px);line-height:1.2;margin-bottom:24px}
 .formats{background:var(--grey-bg)}
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
 .plan{background:#fff;border:1px solid var(--grey);border-radius:var(--r);box-shadow:var(--shadow);padding:32px 30px;display:flex;flex-direction:column;gap:16px;position:relative}
-.plan.feat{border:2px solid var(--yellow);box-shadow:0 20px 60px rgba(255,199,0,.25)}
+.plan.feat{border:2px solid var(--yellow);box-shadow:0 20px 60px rgba(24,0,173,.18)}
 .plan .tag{display:inline-flex;align-self:flex-start;background:var(--grey-bg);border-radius:20px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
-.plan.feat .tag{background:var(--yellow);color:var(--text)}
+.plan.feat .tag{background:var(--yellow);color:#fff}
 .plan .price{font-size:28px;font-weight:800;color:var(--text);line-height:1.1}
 .plan .price small{display:block;font-size:13px;color:var(--muted);font-weight:500;margin-top:6px}
 .plan>p{font-size:15px;color:var(--body)}
 .plan .diamond li{font-size:14.5px;font-weight:500}
 .plan .btn{margin-top:auto;width:100%}
 .person{margin-top:26px;display:grid;grid-template-columns:88px 1fr auto;gap:22px;align-items:center;background:#fff;border:1px solid var(--grey);border-radius:var(--r);box-shadow:var(--shadow);padding:24px 28px}
-.person .ava{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#FFC700,#FF7D23);display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800;color:#fff}
+.person .ava{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#1800ad,#4B3CFF);display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800;color:#fff}
 .person h3{margin-bottom:4px}
 .person p{font-size:15px;color:var(--body)}
 
@@ -237,7 +237,7 @@ h1{font-size:clamp(30px,3.6vw,46px);line-height:1.2;margin-bottom:24px}
 .tcard .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
 .tcard:hover .thumb img{transform:scale(1.05)}
 .tcard .thumb .kpi{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent);color:#fff;font-weight:800;font-size:26px;line-height:1}
-.tcard .thumb .kpi small{display:block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--yellow);margin-top:4px}
+.tcard .thumb .kpi small{display:block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#FFB48A;margin-top:4px}
 .tcard .body{padding:22px 24px 24px;display:flex;flex-direction:column;gap:12px;flex:1}
 .tcard .q{color:var(--yellow);font-size:34px;line-height:.6;font-family:Georgia,serif;font-weight:700}
 .tcard .quote{font-style:italic;font-size:14.5px;color:var(--body);flex:1}
@@ -264,14 +264,14 @@ h1{font-size:clamp(30px,3.6vw,46px);line-height:1.2;margin-bottom:24px}
 /* order */
 .order{background:var(--yellow-soft);overflow:hidden}
 .order-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,60px);align-items:center}
-.order h2{margin-bottom:22px}
-.order p{color:var(--text);font-size:16px}
+.order h2{margin-bottom:22px;color:#fff}
+.order p{color:rgba(255,255,255,.9);font-size:16px}
 .order p+p{margin-top:16px}
-.order p a{color:var(--orange);text-decoration:underline}
+.order p a{color:#FFB48A;text-decoration:underline}
 .order .contacts{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.order .contacts a{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.55);border-radius:30px;padding:10px 16px;font-size:14px;font-weight:600;color:var(--text);transition:.2s}
-.order .contacts a:hover{background:#fff}
-.form{margin-top:36px;background:#fff;border-radius:var(--r);padding:36px 40px;box-shadow:0 15px 60px rgba(120,90,0,.18)}
+.order .contacts a{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:30px;padding:10px 16px;font-size:14px;font-weight:600;color:#fff;transition:.2s}
+.order .contacts a:hover{background:#fff;color:var(--yellow)}
+.form{margin-top:36px;background:#fff;border-radius:var(--r);padding:36px 40px;box-shadow:0 15px 60px rgba(0,0,60,.35)}
 .form .row{display:grid;grid-template-columns:1fr 1fr 1.3fr auto;gap:16px;align-items:center}
 .form input,.form select{width:100%;font:15px var(--f);padding:17px 18px;border:0;border-radius:12px;background:var(--input);color:var(--text);outline:none;transition:.2s}
 .form input:focus,.form select:focus{background:#fff;box-shadow:0 0 0 2px var(--yellow)}
@@ -286,21 +286,21 @@ h1{font-size:clamp(30px,3.6vw,46px);line-height:1.2;margin-bottom:24px}
 footer{background:var(--footer);color:#fff;padding:56px 0 30px;font-size:14px}
 .f-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
 .f-grid h4{display:flex;align-items:center;gap:8px;color:#fff;font-size:14px;font-weight:700;margin-bottom:18px}
-.f-grid h4 i{width:16px;height:16px;border-radius:4px;background:var(--yellow);display:inline-block}
+.f-grid h4 i{width:16px;height:16px;border-radius:4px;background:var(--blue-tint);display:inline-block}
 .f-grid ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;color:#D8D8D8}
-.f-grid a:hover{color:var(--yellow)}
+.f-grid a:hover{color:var(--blue-tint)}
 .f-bot{margin-top:40px;padding-top:26px;border-top:1px solid rgba(255,255,255,.14);display:flex;align-items:center;gap:26px;flex-wrap:wrap;color:#CFCFCF;font-size:13px}
 .soc{display:flex;gap:10px}
 .soc a{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center}
-.soc a:hover{background:var(--yellow);border-color:var(--yellow)}
+.soc a:hover{background:var(--blue-tint);border-color:var(--blue-tint)}
 .soc svg{width:18px;height:18px;fill:#fff}
 .soc a:hover svg{fill:var(--text)}
 .f-bot .copy{margin-left:auto}
 
 /* floating */
-.fab{position:fixed;right:22px;bottom:22px;z-index:60;width:60px;height:60px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px rgba(255,199,0,.45);transition:.2s}
+.fab{position:fixed;right:22px;bottom:22px;z-index:60;width:60px;height:60px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px rgba(24,0,173,.4);transition:.2s}
 .fab:hover{transform:scale(1.06)}
-.fab svg{width:26px;height:26px;fill:var(--text)}
+.fab svg{width:26px;height:26px;fill:#fff}
 
 /* review mode (draft only — remove #review block for production) */
 #review{position:fixed;left:18px;bottom:18px;z-index:60;display:flex;gap:6px;align-items:center;background:#fff;border:1px solid var(--grey);border-radius:999px;padding:6px 6px 6px 14px;font-size:12.5px;color:var(--text);box-shadow:var(--shadow-2)}
@@ -539,38 +539,38 @@ body.review .tbc:hover:after{opacity:1}
         <svg class="illu" viewBox="0 0 560 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ілюстрація аудиту: дашборд, графіки, лупа">
           <defs>
             <linearGradient id="og" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8A3D"/><stop offset="1" stop-color="#F56400"/></linearGradient>
-            <linearGradient id="yg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFD84D"/><stop offset="1" stop-color="#FFC700"/></linearGradient>
+            <linearGradient id="yg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4B3CFF"/><stop offset="1" stop-color="#1800ad"/></linearGradient>
             <filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#8A8DA0" flood-opacity=".25"/></filter>
           </defs>
-          <ellipse cx="290" cy="300" rx="230" ry="150" fill="#FFF3C4"/>
+          <ellipse cx="290" cy="300" rx="230" ry="150" fill="#EEEBFF"/>
           <path d="M120 300 L300 200 L500 300 L320 400 Z" fill="#fff" filter="url(#sh)"/>
           <path d="M120 300 L300 200 L500 300 L320 400 Z" fill="#F7F7FA"/>
           <g transform="translate(150 60)" filter="url(#sh)">
             <rect x="0" y="0" width="250" height="200" rx="18" fill="url(#og)"/>
             <rect x="18" y="18" width="214" height="164" rx="12" fill="#fff" opacity=".95"/>
-            <rect x="36" y="110" width="18" height="52" rx="4" fill="#FFC700"/>
+            <rect x="36" y="110" width="18" height="52" rx="4" fill="#1800ad"/>
             <rect x="62" y="84" width="18" height="78" rx="4" fill="#FF7D23"/>
-            <rect x="88" y="98" width="18" height="64" rx="4" fill="#FFC700"/>
+            <rect x="88" y="98" width="18" height="64" rx="4" fill="#1800ad"/>
             <rect x="114" y="58" width="18" height="104" rx="4" fill="#F56400"/>
             <polyline points="148,140 168,110 188,122 208,80 222,64" fill="none" stroke="#F56400" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
             <circle cx="222" cy="64" r="6" fill="#fff" stroke="#F56400" stroke-width="4"/>
-            <circle cx="70" cy="52" r="20" fill="none" stroke="#FFE68C" stroke-width="10"/>
+            <circle cx="70" cy="52" r="20" fill="none" stroke="#DAD5FF" stroke-width="10"/>
             <path d="M70 32 a20 20 0 0 1 19 26" fill="none" stroke="#F56400" stroke-width="10" stroke-linecap="round"/>
             <rect x="100" y="36" width="60" height="8" rx="4" fill="#E9E9EE"/>
             <rect x="100" y="50" width="40" height="8" rx="4" fill="#E9E9EE"/>
           </g>
           <g transform="translate(360 250)" filter="url(#sh)">
             <circle cx="0" cy="0" r="46" fill="#fff" stroke="#F56400" stroke-width="12"/>
-            <circle cx="0" cy="0" r="34" fill="#FFF3C4" opacity=".8"/>
+            <circle cx="0" cy="0" r="34" fill="#EEEBFF" opacity=".9"/>
             <path d="M34 34 L84 84" stroke="#F56400" stroke-width="16" stroke-linecap="round"/>
             <path d="M-14 2 L-4 12 L16 -12" fill="none" stroke="#F56400" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
           </g>
           <g filter="url(#sh)">
-            <ellipse cx="170" cy="380" rx="34" ry="14" fill="#E5A800"/>
+            <ellipse cx="170" cy="380" rx="34" ry="14" fill="#10007a"/>
             <ellipse cx="170" cy="372" rx="34" ry="14" fill="url(#yg)"/>
-            <ellipse cx="170" cy="364" rx="34" ry="14" fill="#E5A800"/>
+            <ellipse cx="170" cy="364" rx="34" ry="14" fill="#10007a"/>
             <ellipse cx="170" cy="356" rx="34" ry="14" fill="url(#yg)"/>
-            <text x="170" y="361" text-anchor="middle" font-family="Montserrat,Arial" font-weight="800" font-size="14" fill="#8A5A00">$</text>
+            <text x="170" y="361" text-anchor="middle" font-family="Montserrat,Arial" font-weight="800" font-size="14" fill="#fff">$</text>
           </g>
           <g filter="url(#sh)">
             <rect x="60" y="180" width="120" height="36" rx="18" fill="#fff"/>
@@ -584,7 +584,7 @@ body.review .tbc:hover:after{opacity:1}
           </g>
           <g transform="translate(300 330)" filter="url(#sh)">
             <rect x="-40" y="-8" width="80" height="60" rx="14" fill="#fff"/>
-            <path d="M-22 6 h44 l-6 24 h-32 z" fill="#FFC700"/>
+            <path d="M-22 6 h44 l-6 24 h-32 z" fill="#1800ad"/>
             <circle cx="-8" cy="40" r="4" fill="#23282d"/><circle cx="14" cy="40" r="4" fill="#23282d"/>
             <path d="M-30 -2 h8 l4 8" fill="none" stroke="#23282d" stroke-width="3" stroke-linecap="round"/>
           </g>
@@ -869,14 +869,14 @@ body.review .tbc:hover:after{opacity:1}
         <svg class="illu" viewBox="0 0 520 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ілюстрація: заявка летить у чат">
           <defs>
             <linearGradient id="og2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8A3D"/><stop offset="1" stop-color="#F56400"/></linearGradient>
-            <filter id="sh2" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="16" stdDeviation="14" flood-color="#8A5A00" flood-opacity=".25"/></filter>
+            <filter id="sh2" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="16" stdDeviation="14" flood-color="#05003a" flood-opacity=".4"/></filter>
           </defs>
-          <ellipse cx="270" cy="250" rx="220" ry="140" fill="#FFD966" opacity=".7"/>
-          <ellipse cx="330" cy="290" rx="150" ry="90" fill="#FFE68C" opacity=".8"/>
+          <ellipse cx="270" cy="250" rx="220" ry="140" fill="#fff" opacity=".1"/>
+          <ellipse cx="330" cy="290" rx="150" ry="90" fill="#fff" opacity=".12"/>
           <g transform="translate(120 150)" filter="url(#sh2)">
             <rect x="0" y="40" width="220" height="150" rx="16" fill="url(#og2)"/>
             <rect x="30" y="0" width="160" height="110" rx="10" fill="#fff"/>
-            <rect x="48" y="20" width="90" height="10" rx="5" fill="#FFC700"/>
+            <rect x="48" y="20" width="90" height="10" rx="5" fill="#1800ad"/>
             <rect x="48" y="40" width="124" height="8" rx="4" fill="#E9E9EE"/>
             <rect x="48" y="56" width="104" height="8" rx="4" fill="#E9E9EE"/>
             <rect x="48" y="72" width="60" height="8" rx="4" fill="#E9E9EE"/>
@@ -898,10 +898,10 @@ body.review .tbc:hover:after{opacity:1}
           <path d="M330 220 C 360 260, 400 280, 440 300" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="6 8" opacity=".9"/>
           <g transform="translate(70 300)" filter="url(#sh2)">
             <circle cx="0" cy="0" r="34" fill="#fff"/>
-            <circle cx="0" cy="0" r="26" fill="none" stroke="#FFC700" stroke-width="4"/>
+            <circle cx="0" cy="0" r="26" fill="none" stroke="#1800ad" stroke-width="4"/>
             <path d="M0 -14 V0 L10 8" fill="none" stroke="#F56400" stroke-width="4" stroke-linecap="round"/>
           </g>
-          <text x="70" y="366" text-anchor="middle" font-family="Montserrat,Arial" font-weight="700" font-size="12" fill="#5a5000">відповідь ≤ 1 год</text>
+          <text x="70" y="366" text-anchor="middle" font-family="Montserrat,Arial" font-weight="700" font-size="12" fill="#fff">відповідь ≤ 1 год</text>
         </svg>
       </div>
     </div>
