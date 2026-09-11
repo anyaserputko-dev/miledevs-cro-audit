@@ -1,0 +1,1083 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRO та UI/UX аудит Shopify-магазину — MileDevs</title>
+<meta name="description" content="Глибокий CRO та UI/UX аудит Shopify-магазину від MileDevs: 70 точок перевірки, аналітика й записи сесій, гіпотези з пріоритетами, quick wins і roadmap на 90 днів. Shopify Selected Partner, 100+ магазинів.">
+<meta property="og:title" content="CRO та UI/UX аудит Shopify-магазину — MileDevs">
+<meta property="og:description" content="Реклама приводить людей. Магазин їх відпускає. Знаходимо, де саме ви втрачаєте покупців, і віддаємо план змін із пріоритетами.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="uk_UA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Fahkwang:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000;--s1:#0f0f0f;--s2:#161616;--s3:#1d1d1d;
+  --line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.16);
+  --txt:#fff;--muted:#a7a7a7;--muted2:#7a7a7a;
+  --lime:#d4ff00;--lime-2:#c2ea00;--ink:#0a0a0a;
+  --danger:#ff5c5c;--warn:#ffb648;--ok:#7ce38b;
+  --r:18px;--r-sm:12px;
+  --h:"Unbounded",system-ui,sans-serif;--b:"Manrope",system-ui,sans-serif;--w:"Fahkwang","Manrope",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.6 var(--b);font-weight:400;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:var(--h);font-weight:600;letter-spacing:-.02em;margin:0;line-height:1.12}
+h2{font-size:clamp(26px,3.6vw,42px)}
+h3{font-size:clamp(17px,1.6vw,20px);line-height:1.3}
+p{margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+section{padding-block:clamp(56px,8vw,104px)}
+.eyebrow{font-family:var(--h);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);font-weight:500}
+.lead{color:var(--muted);font-size:clamp(16px,1.3vw,18px);max-width:640px}
+.sec-head{display:flex;flex-direction:column;gap:14px;margin-bottom:clamp(28px,4vw,48px);max-width:820px}
+.sec-head.center{align-items:center;text-align:center;margin-inline:auto}
+.muted{color:var(--muted)}
+.lime{color:var(--lime)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:stretch;border-radius:10px;overflow:hidden;font-family:var(--b);font-weight:600;font-size:15px;line-height:1;transition:transform .15s ease,filter .15s ease;white-space:nowrap}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.04)}
+.btn:active{transform:translateY(0)}
+.btn>span{display:flex;align-items:center;padding:16px 22px}
+.btn>i{display:flex;align-items:center;justify-content:center;width:50px;font-style:normal;border-left:1px solid rgba(0,0,0,.12);font-size:18px}
+.btn.lime{background:var(--lime);color:var(--ink)}
+.btn.ghost{border:1px solid var(--line2);color:var(--txt);background:rgba(255,255,255,.02)}
+.btn.ghost>i{border-left-color:var(--line2)}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.dark>i{border-left-color:rgba(255,255,255,.14)}
+.btn.sm>span{padding:12px 16px;font-size:14px}.btn.sm>i{width:40px;font-size:15px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:#151515;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;color:var(--muted);white-space:nowrap}
+.pill b{color:#fff;font-weight:700}
+.pill svg{width:14px;height:14px}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;height:68px}
+.wordmark{font-family:var(--w);font-weight:500;font-size:22px;letter-spacing:.02em;color:#fff}
+.nav ul{list-style:none;margin:0;padding:0;display:flex;gap:28px;font-size:14px}
+.nav ul a{color:#ddd;transition:color .15s}.nav ul a:hover{color:var(--lime)}
+.nav .right{display:flex;align-items:center;gap:16px}
+.lang{font-size:12px;letter-spacing:.06em;color:var(--muted2)}.lang b{color:#fff;font-weight:600}
+.crumbs{font-size:12px;color:var(--muted2);padding:18px 0 0;display:flex;gap:8px;flex-wrap:wrap}
+.crumbs a:hover{color:#fff}.crumbs span{color:#cfcfcf}
+
+/* hero */
+.hero{padding-block:clamp(36px,6vw,80px) clamp(48px,7vw,96px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+h1{font-size:clamp(32px,5vw,60px);font-weight:600;line-height:1.05;margin:14px 0 22px}
+h1 em{font-style:normal;color:var(--lime)}
+.hero .lead+ .lead{margin-top:14px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+
+/* report mock */
+.mock{position:relative}
+.mock .card{background:var(--s1);border:1px solid var(--line2);border-radius:22px;padding:22px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.mock .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;font-size:12px;color:var(--muted)}
+.mock .top b{font-family:var(--h);font-size:12px;color:#fff;font-weight:500;letter-spacing:.04em}
+.mock .dots{display:flex;gap:6px}.mock .dots i{width:8px;height:8px;border-radius:50%;background:#2a2a2a}
+.funnel{display:grid;grid-template-columns:110px 1fr 44px;gap:8px 12px;align-items:center;font-size:13px;margin-bottom:18px}
+.funnel .lb{color:var(--muted)}
+.funnel .bar{height:12px;border-radius:6px;background:#222;position:relative;overflow:hidden}
+.funnel .bar i{position:absolute;inset:0;width:var(--w);background:linear-gradient(90deg,var(--lime),var(--lime-2));border-radius:6px}
+.funnel .bar.leak i{background:linear-gradient(90deg,#ff7a7a,var(--danger))}
+.funnel .tag{font-family:var(--h);font-size:10px;color:var(--danger);letter-spacing:.06em;text-align:right}
+.finding{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}
+.finding .sev{flex:0 0 auto;font-family:var(--h);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:5px 8px;border-radius:6px;margin-top:2px}
+.sev.crit{background:rgba(255,92,92,.15);color:#ff8a8a}.sev.imp{background:rgba(255,182,72,.14);color:#ffc86e}.sev.qw{background:rgba(212,255,0,.14);color:var(--lime)}
+.finding .t{font-size:14px;font-weight:600;line-height:1.35}
+.finding .d{font-size:12.5px;color:var(--muted);margin-top:3px}
+.finding .ie{margin-left:auto;flex:0 0 auto;display:flex;flex-direction:column;gap:4px;align-items:flex-end;font-size:10px;color:var(--muted2);font-family:var(--h);letter-spacing:.06em}
+.finding .ie i{display:inline-flex;gap:3px}.finding .ie i b{width:6px;height:6px;border-radius:50%;background:#333}.finding .ie i b.on{background:var(--lime)}
+.mock .note{position:absolute;right:-8px;top:-14px;background:var(--lime);color:var(--ink);font-family:var(--h);font-size:10px;letter-spacing:.08em;padding:8px 12px;border-radius:8px;transform:rotate(3deg)}
+
+/* proof strip */
+.proof{border-block:1px solid var(--line);background:var(--s1)}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.proof-grid>div{background:var(--s1);padding:28px 26px}
+.big{font-family:var(--h);font-size:clamp(34px,4.4vw,52px);font-weight:600;letter-spacing:-.03em;color:var(--lime);line-height:1}
+.proof-grid p{margin-top:10px;font-size:15px;color:#ddd}
+.proof-grid small{display:block;margin-top:10px;font-size:12px;color:var(--muted2)}
+.proof-grid small a{border-bottom:1px dotted var(--muted2)}
+.proof-grid small a:hover{color:#fff}
+
+/* generic grids */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--s1);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+.card h3{margin-bottom:10px}
+.card p{color:var(--muted);font-size:15px}
+.card .n{font-family:var(--h);font-size:12px;color:var(--lime);letter-spacing:.1em;margin-bottom:16px}
+.card.cta{background:var(--lime);color:var(--ink);border-color:var(--lime);display:flex;flex-direction:column;justify-content:space-between;gap:18px}
+.card.cta h3{color:var(--ink)}.card.cta p{color:#2b2b2b}
+
+/* what is */
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:center}
+.def{padding:24px 0;border-top:1px solid var(--line)}
+.def:last-child{border-bottom:1px solid var(--line)}
+.def h3{margin-bottom:8px}.def p{color:var(--muted);font-size:15px}
+.insight{margin-top:24px;background:var(--s2);border:1px solid var(--line2);border-left:3px solid var(--lime);border-radius:var(--r-sm);padding:18px 20px}
+.insight b{display:block;font-family:var(--h);font-size:13px;font-weight:500;margin-bottom:6px}
+.insight p{color:#ddd;font-size:15px}
+.funnel-art{background:var(--s1);border:1px solid var(--line);border-radius:22px;padding:26px}
+.funnel-art svg{width:100%;height:auto;display:block}
+
+/* honesty */
+.honest{margin-top:22px;display:flex;gap:14px;align-items:flex-start;padding:18px 20px;border:1px dashed var(--line2);border-radius:var(--r-sm);color:var(--muted);font-size:14.5px}
+.honest b{color:#fff}
+
+/* included */
+.inc{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.inc .card{padding:26px}
+.inc .ic{width:40px;height:40px;border-radius:10px;background:rgba(212,255,0,.1);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.inc .ic svg{width:20px;height:20px;stroke:var(--lime);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* result */
+.result{background:var(--lime);color:var(--ink);border-radius:26px;padding:clamp(28px,4vw,52px);display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(24px,4vw,56px);position:relative;overflow:hidden}
+.result h2{color:var(--ink)}
+.result .sub{color:#333;margin-top:12px;font-size:16px}
+.result ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.result li{display:flex;gap:14px;align-items:flex-start;font-size:16px;line-height:1.45}
+.result li i{flex:0 0 26px;height:26px;border-radius:50%;background:var(--ink);color:var(--lime);display:flex;align-items:center;justify-content:center;font-size:13px;font-style:normal;margin-top:1px}
+.result li b{display:block;font-weight:700}
+.result li span{color:#3a3a3a;font-size:14.5px}
+.result .foot{margin-top:22px;padding-top:18px;border-top:1px solid rgba(0,0,0,.15);font-size:14.5px;color:#333}
+.result .bulb{position:absolute;right:-30px;top:-30px;width:180px;height:180px;border-radius:50%;background:rgba(0,0,0,.06)}
+
+/* checklist */
+.chk-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.count{font-family:var(--h);font-size:clamp(48px,7vw,84px);line-height:1;color:var(--lime);font-weight:600;letter-spacing:-.04em}
+.count small{display:block;font-size:12px;letter-spacing:.14em;color:var(--muted);font-weight:500;margin-top:8px}
+.acc{border-top:1px solid var(--line)}
+.acc details{border-bottom:1px solid var(--line)}
+.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:18px;padding:20px 4px;font-family:var(--h);font-size:clamp(15px,1.5vw,18px);font-weight:500}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary .k{font-size:12px;color:var(--lime);letter-spacing:.1em;flex:0 0 32px}
+.acc summary .c{margin-left:auto;font-size:12px;color:var(--muted2);letter-spacing:.06em;font-family:var(--b);white-space:nowrap}
+.acc summary .pl{flex:0 0 28px;height:28px;border:1px solid var(--line2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;transition:transform .2s}
+.acc details[open] summary .pl{transform:rotate(45deg);background:var(--lime);color:var(--ink);border-color:var(--lime)}
+.acc ol{margin:0;padding:0 4px 22px 54px;display:grid;grid-template-columns:1fr 1fr;gap:8px 32px;color:#d6d6d6;font-size:15px}
+.acc ol li{padding-left:4px}
+
+/* steps timeline */
+.tl{position:relative;display:grid;gap:18px}
+.tl:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line2);transform:translateX(-50%)}
+.step{display:grid;grid-template-columns:1fr 64px 1fr;align-items:center;gap:0}
+.step .box{background:var(--s1);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px}
+.step .box h3{margin-bottom:8px}.step .box p{color:var(--muted);font-size:15px}
+.step .num{justify-self:center;width:40px;height:40px;border-radius:50%;background:var(--bg);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-family:var(--h);font-size:13px;color:var(--lime);position:relative;z-index:1}
+.step:nth-child(odd) .box{grid-column:3}.step:nth-child(odd) .num{grid-column:2;grid-row:1}
+.step:nth-child(even) .box{grid-column:1;grid-row:1}.step:nth-child(even) .num{grid-column:2;grid-row:1}
+.tl-foot{margin-top:28px;display:flex;justify-content:center}
+.tl-foot .pill{padding:12px 18px;font-size:14px}
+
+/* formats */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.plan{background:var(--s1);border:1px solid var(--line);border-radius:22px;padding:30px;display:flex;flex-direction:column;gap:18px}
+.plan.feat{border-color:var(--lime);box-shadow:0 0 0 1px var(--lime) inset,0 30px 70px rgba(212,255,0,.06)}
+.plan .tag{font-family:var(--h);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.plan.feat .tag{color:var(--lime)}
+.plan .price{font-family:var(--h);font-size:clamp(24px,2.4vw,30px);font-weight:600;letter-spacing:-.02em}
+.plan .price small{display:block;font-family:var(--b);font-size:13px;color:var(--muted);font-weight:500;letter-spacing:0;margin-top:6px}
+.plan p{color:var(--muted);font-size:15px}
+.plan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14.5px;color:#ddd}
+.plan ul li{display:flex;gap:10px;align-items:flex-start}
+.plan ul li:before{content:"";flex:0 0 6px;height:6px;border-radius:50%;background:var(--lime);margin-top:9px}
+.plan .btn{margin-top:auto;justify-content:center}
+.plan .btn>span{flex:1;justify-content:center}
+
+/* who */
+.who{display:grid;grid-template-columns:96px 1fr auto;gap:24px;align-items:center;background:var(--s1);border:1px solid var(--line);border-radius:22px;padding:28px}
+.who .ava{width:96px;height:96px;border-radius:20px;background:linear-gradient(135deg,#1e1e1e,#0c0c0c);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-family:var(--h);font-size:34px;color:var(--lime)}
+.who h3{margin-bottom:6px}.who p{color:var(--muted);font-size:15px;max-width:640px}
+
+/* cases */
+.case-feat{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;margin-bottom:20px}
+.case-feat .img{border-radius:22px;overflow:hidden;border:1px solid var(--line);min-height:320px;background:#111}
+.case-feat .img img{width:100%;height:100%;object-fit:cover}
+.case-feat .txt{background:var(--s1);border:1px solid var(--line);border-radius:22px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;gap:20px}
+.case-feat .kpi{font-family:var(--h);font-size:clamp(36px,4vw,54px);color:var(--lime);letter-spacing:-.03em;line-height:1}
+.case-feat .kpi small{display:block;font-family:var(--b);font-size:14px;color:var(--muted);letter-spacing:0;margin-top:8px}
+.quote{font-size:16px;line-height:1.55;color:#e6e6e6}
+.quote:before{content:"“";color:var(--lime);font-family:var(--h);font-size:28px;line-height:0;vertical-align:-8px;margin-right:6px}
+.byline{font-size:13px;color:var(--muted)}.byline b{color:#fff;display:block;font-weight:600}
+.testi{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.testi .card{display:flex;flex-direction:column;gap:16px}
+.testi .kpi{font-family:var(--h);font-size:30px;color:var(--lime);letter-spacing:-.02em;line-height:1}
+.testi .kpi small{display:block;font-family:var(--b);font-size:13px;color:var(--muted);letter-spacing:0;margin-top:6px}
+.testi .quote{font-size:14.5px;color:#ddd}
+.port{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}
+.port a{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/3;border:1px solid var(--line);background:#111}
+.port img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.port a:hover img{transform:scale(1.05)}
+.port .cap{position:absolute;left:0;right:0;bottom:0;padding:14px;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent);font-family:var(--h);font-size:12px;letter-spacing:.06em}
+.port .cap small{display:block;font-family:var(--b);font-size:11px;color:#bbb;letter-spacing:0;margin-top:2px}
+
+/* faq */
+.faq{max-width:860px;margin:0 auto}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:20px 0;font-family:var(--h);font-size:clamp(15px,1.4vw,17px);font-weight:500}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{flex:0 0 28px;height:28px;border:1px solid var(--line2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-style:normal;transition:transform .2s}
+.faq details[open] summary i{transform:rotate(45deg);background:var(--lime);color:var(--ink);border-color:var(--lime)}
+.faq .a{padding:0 0 22px;color:var(--muted);font-size:15.5px;max-width:720px}
+
+/* order */
+.order{background:var(--lime);color:var(--ink)}
+.order-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:start}
+.order h2{color:var(--ink)}
+.order .lead{color:#2e2e2e}
+.order .lead+.lead{margin-top:14px}
+.order .contacts{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.order .contacts a{display:inline-flex;align-items:center;gap:8px;background:rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.14);border-radius:999px;padding:10px 16px;font-size:14px;font-weight:600;color:var(--ink)}
+.order .contacts a:hover{background:var(--ink);color:var(--lime)}
+.form{background:#fff;border-radius:22px;padding:28px;color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.18)}
+.form h3{font-size:18px;margin-bottom:6px}
+.form .hint{font-size:13.5px;color:#666;margin-bottom:18px}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form label{display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:#444;margin-bottom:12px}
+.form input,.form select,.form textarea{font:15px var(--b);padding:13px 14px;border:1px solid #d9d9d9;border-radius:10px;background:#fafafa;color:#111;width:100%;outline:none;transition:border-color .15s,box-shadow .15s}
+.form input:focus,.form select:focus,.form textarea:focus{border-color:#111;box-shadow:0 0 0 3px rgba(212,255,0,.5);background:#fff}
+.form textarea{min-height:80px;resize:vertical}
+.form .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.form .actions .btn{flex:1}.form .actions .btn>span{flex:1;justify-content:center}
+.form .fine{font-size:12px;color:#777;margin-top:12px}
+.form .ok{display:none;margin-top:14px;padding:12px 14px;border-radius:10px;background:#f2ffb3;font-size:14px;color:#222}
+.form .ok.show{display:block}
+
+/* footer */
+footer{background:#050505;border-top:1px solid var(--line);padding:56px 0 28px;color:var(--muted);font-size:14px}
+.f-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.f-grid h4{font-family:var(--h);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#fff;font-weight:500;margin-bottom:16px}
+.f-grid ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.f-grid a:hover{color:var(--lime)}
+.f-bot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:44px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--muted2)}
+
+/* floating */
+.fab{position:fixed;right:18px;bottom:18px;z-index:60;width:56px;height:56px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(212,255,0,.25);transition:transform .15s}
+.fab:hover{transform:scale(1.06)}
+.fab svg{width:26px;height:26px;fill:var(--ink)}
+
+/* review mode (draft only — remove #review block for production) */
+#review{position:fixed;left:18px;bottom:18px;z-index:60;display:flex;gap:6px;align-items:center;background:#1a1a1a;border:1px solid var(--line2);border-radius:999px;padding:6px 6px 6px 14px;font-size:12.5px;color:#ddd;box-shadow:0 12px 30px rgba(0,0,0,.5)}
+#review button{font:600 12px var(--b);border:0;border-radius:999px;padding:8px 12px;cursor:pointer;background:var(--lime);color:var(--ink)}
+#review button.x{background:transparent;color:var(--muted);padding:8px 8px}
+.tbc{position:relative}
+body.review .tbc{outline:2px dotted var(--lime);outline-offset:3px;border-radius:4px;cursor:help}
+body.review .tbc:after{content:attr(data-why);position:absolute;left:0;top:calc(100% + 8px);background:var(--lime);color:var(--ink);font:500 11px/1.35 var(--b);padding:6px 9px;border-radius:6px;white-space:normal;width:max-content;max-width:280px;z-index:20;opacity:0;pointer-events:none;transition:opacity .15s}
+body.review .tbc:hover:after{opacity:1}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* responsive */
+@media (max-width:1024px){
+  .inc,.plans,.testi,.g3{grid-template-columns:1fr 1fr}
+  .port{grid-template-columns:1fr 1fr}
+  .f-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:900px){
+  .nav ul{display:none}
+  .hero-grid,.what-grid,.result,.order-grid,.case-feat{grid-template-columns:1fr}
+  .mock{max-width:560px}
+  .proof-grid{grid-template-columns:1fr}
+  .tl:before{left:20px}
+  .step{grid-template-columns:40px 1fr;gap:16px}
+  .step:nth-child(odd) .box,.step:nth-child(even) .box{grid-column:2;grid-row:1}
+  .step:nth-child(odd) .num,.step:nth-child(even) .num{grid-column:1;grid-row:1;align-self:start;margin-top:22px}
+  .acc ol{grid-template-columns:1fr;padding-left:36px}
+  .acc summary .c{display:none}
+  .who{grid-template-columns:72px 1fr}.who .ava{width:72px;height:72px;font-size:26px}
+  .who .btn{grid-column:1/-1}
+}
+@media (max-width:640px){
+  .inc,.plans,.testi,.g2,.g3,.f-grid{grid-template-columns:1fr}
+  .form .row{grid-template-columns:1fr}
+  .form .actions{flex-direction:column}
+  .port{grid-template-columns:1fr 1fr;gap:10px}
+  .btn{width:100%}.btn>span{flex:1;justify-content:center}
+  .nav .lang{display:none}
+  .nav .btn{width:auto}
+  .mock .note{right:6px;top:-12px}
+  .funnel{grid-template-columns:88px 1fr 40px}
+  #review{left:12px;bottom:84px}
+  .fab{right:12px;bottom:12px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="wordmark" href="https://www.miledevs.com/uk" aria-label="MileDevs">MILEDEVS</a>
+    <ul>
+      <li><a href="https://www.miledevs.com/pages/portfolio">портфоліо</a></li>
+      <li><a href="https://www.miledevs.com/pages/services">послуги</a></li>
+      <li><a href="#cases">кейси</a></li>
+      <li><a href="#faq">питання</a></li>
+      <li><a href="https://www.miledevs.com/pages/contact">контакт</a></li>
+    </ul>
+    <div class="right">
+      <span class="lang"><a href="https://www.miledevs.com/">EN</a> | <b>UK</b></span>
+      <a class="btn lime sm" href="#order"><span>Отримати план аудиту</span><i>↗</i></a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="https://www.miledevs.com/uk">Головна</a> / <a href="https://www.miledevs.com/pages/services">Послуги</a> / <span>CRO та UI/UX аудит</span></nav>
+    <div class="hero-grid" style="margin-top:34px">
+      <div>
+        <div class="badges">
+          <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>Shopify Selected Partner</span>
+          <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3z"/></svg>Top Rated</span>
+        </div>
+        <p class="eyebrow">Глибокий CRO та UI/UX аудит Shopify-магазину</p>
+        <h1>Реклама приводить людей. <em>Магазин їх відпускає.</em></h1>
+        <p class="lead">Ви платите за кожного відвідувача. Більшість із них дивляться, кладуть у кошик — і йдуть без покупки. Аудит показує, на якому саме кроці й чому.</p>
+        <p class="lead">Проходимо шлях покупця від першого кліку до оплати на десктопі та в телефоні, звіряємо з аналітикою й записами сесій — і віддаємо план змін із пріоритетами: від правок на день до редизайну.</p>
+        <div class="cta-row">
+          <a class="btn lime" href="#order"><span>Отримати план аудиту</span><i>↗</i></a>
+          <a class="btn ghost" href="https://t.me/shopify_evgene" target="_blank" rel="noopener"><span>Написати в Telegram</span><i>↗</i></a>
+        </div>
+        <div class="stats">
+          <span class="pill tbc" data-why="З сайту miledevs.com («100+ stores built»). У брифі фігурує «40+» — Євгеній має підтвердити цифру"><b>100+</b> магазинів</span>
+          <span class="pill"><b>5+</b> років у Shopify</span>
+          <span class="pill"><b>≤ 1 год</b> відповідь на заявку</span>
+        </div>
+      </div>
+
+      <div class="mock rv">
+        <div class="note">ФРАГМЕНТ ЗВІТУ · ПРИКЛАД</div>
+        <div class="card">
+          <div class="top"><b>CRO-АУДИТ · ВОРОНКА</b><span class="dots"><i></i><i></i><i></i></span></div>
+          <div class="funnel" aria-hidden="true">
+            <span class="lb">Головна</span><div class="bar"><i style="--w:100%"></i></div><span></span>
+            <span class="lb">Каталог</span><div class="bar"><i style="--w:78%"></i></div><span></span>
+            <span class="lb">Картка товару</span><div class="bar leak"><i style="--w:46%"></i></div><span class="tag">ВИТІК</span>
+            <span class="lb">Кошик</span><div class="bar"><i style="--w:30%"></i></div><span></span>
+            <span class="lb">Checkout</span><div class="bar leak"><i style="--w:14%"></i></div><span class="tag">ВИТІК</span>
+            <span class="lb">Оплата</span><div class="bar"><i style="--w:8%"></i></div><span></span>
+          </div>
+          <div class="finding">
+            <span class="sev crit">Критично</span>
+            <div><div class="t">Вартість доставки видно лише на останньому кроці checkout</div><div class="d">Найчастіша причина кинутого кошика. Показати в картці товару й у кошику.</div></div>
+            <div class="ie"><i title="вплив"><b class="on"></b><b class="on"></b><b class="on"></b></i><i title="складність"><b class="on"></b><b></b><b></b></i></div>
+          </div>
+          <div class="finding">
+            <span class="sev qw">Quick win</span>
+            <div><div class="t">Кнопка «Додати в кошик» ховається під фото на мобільному</div><div class="d">Зробити липкою внизу екрана. Правка на день.</div></div>
+            <div class="ie"><i><b class="on"></b><b class="on"></b><b></b></i><i><b class="on"></b><b></b><b></b></i></div>
+          </div>
+          <div class="finding">
+            <span class="sev imp">Важливо</span>
+            <div><div class="t">Гостьове оформлення вимкнене — реєстрація обовʼязкова</div><div class="d">Увімкнути guest checkout, реєстрацію запропонувати після оплати.</div></div>
+            <div class="ie"><i><b class="on"></b><b class="on"></b><b class="on"></b></i><i><b class="on"></b><b class="on"></b><b></b></i></div>
+          </div>
+          <div class="finding">
+            <span class="sev imp">Важливо</span>
+            <div><div class="t">Три додатки з відгуками дублюють один одного й гальмують тему</div><div class="d">Лишити один, прибрати два скрипти з кожної сторінки.</div></div>
+            <div class="ie"><i><b class="on"></b><b class="on"></b><b></b></i><i><b class="on"></b><b class="on"></b><b></b></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<section class="proof">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Чому саме конверсія</p>
+      <h2>Це не «у вас поганий трафік». Це математика воронки.</h2>
+      <p class="lead">Кожна десята частка відсотка конверсії множиться на весь рекламний бюджет. Тому спершу лагодимо магазин — і лише потім радимо збільшувати трафік.</p>
+    </div>
+    <div class="proof-grid rv">
+      <div>
+        <div class="big">70%</div>
+        <p>кошиків в e-commerce кидають до оплати — середнє за 50 дослідженнями</p>
+        <small>Baymard Institute, 70,22 % · <a href="https://baymard.com/lists/cart-abandonment-rate" target="_blank" rel="noopener">джерело</a></small>
+      </div>
+      <div>
+        <div class="big">+35%</div>
+        <p>до конверсії може дати середньому великому магазину лише краще спроєктований checkout</p>
+        <small>Baymard Institute, 35,26 % · <a href="https://baymard.com/lists/cart-abandonment-rate" target="_blank" rel="noopener">джерело</a></small>
+      </div>
+      <div>
+        <div class="big">2–3%</div>
+        <p>середня конверсія e-commerce у світі. На десктопі 3,7 %, на мобільному — 2 %</p>
+        <small>Shopify, серпень 2026, дані Contentsquare · <a href="https://www.shopify.com/blog/ecommerce-conversion-rate" target="_blank" rel="noopener">джерело</a></small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IS -->
+<section id="what">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Що це таке</p>
+      <h2>CRO та UI/UX аудит — людською мовою</h2>
+    </div>
+    <div class="what-grid">
+      <div class="funnel-art rv" aria-label="Схема воронки магазину з точками втрат">
+        <svg viewBox="0 0 560 380" xmlns="http://www.w3.org/2000/svg" font-family="Manrope,system-ui" font-size="13">
+          <defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#d4ff00"/><stop offset="1" stop-color="#8fb400"/></linearGradient></defs>
+          <g fill="#1a1a1a" stroke="#2a2a2a">
+            <path d="M40 30 H480 L440 90 H80 Z"/>
+            <path d="M80 100 H440 L400 160 H120 Z"/>
+            <path d="M120 170 H400 L360 230 H160 Z"/>
+            <path d="M160 240 H360 L320 300 H200 Z"/>
+            <path d="M200 310 H320 L290 360 H230 Z"/>
+          </g>
+          <g fill="#fff" text-anchor="middle" font-weight="600">
+            <text x="260" y="66">Головна · реклама привела</text>
+            <text x="260" y="136">Каталог і пошук</text>
+            <text x="260" y="206">Картка товару</text>
+            <text x="260" y="276">Кошик</text>
+            <text x="260" y="341">Checkout → оплата</text>
+          </g>
+          <g font-size="11" fill="#ff7a7a" font-weight="600">
+            <circle cx="446" cy="130" r="5" fill="#ff5c5c"/><text x="458" y="134">не знаходять товар</text>
+            <circle cx="406" cy="200" r="5" fill="#ff5c5c"/><text x="418" y="204">сумніваються, не вірять</text>
+            <circle cx="366" cy="270" r="5" fill="#ff5c5c"/><text x="378" y="274">сюрприз із доставкою</text>
+            <circle cx="326" cy="335" r="5" fill="#ff5c5c"/><text x="338" y="339">довга форма, реєстрація</text>
+          </g>
+          <g font-size="11" fill="#d4ff00" font-weight="600" text-anchor="end">
+            <text x="70" y="134">UX: навігація</text>
+            <text x="110" y="204">UX + контент</text>
+            <text x="150" y="274">CRO: офер</text>
+            <text x="190" y="339">CRO: checkout</text>
+          </g>
+          <rect x="230" y="366" width="60" height="6" rx="3" fill="url(#lg)"/>
+        </svg>
+      </div>
+      <div>
+        <div class="def">
+          <h3>CRO-аудит (Conversion Rate Optimization)</h3>
+          <p>Пошук «зон втрат»: де саме у воронці відвідувачі перестають рухатися до покупки. Це робота з даними — аналітика, записи сесій, теплові карти, — а не з відчуттями. На виході гіпотези з очікуваним ефектом, а не «зробіть кнопку яскравішою».</p>
+        </div>
+        <div class="def">
+          <h3>UI/UX-аудит</h3>
+          <p>Погляд очима покупця: чи зрозуміло, куди натиснути, чи не губиться людина в каталозі, чи не лякає її checkout, чи витримує все це телефон. Знаходимо барʼєри в навігації, картках товару, кошику й оформленні замовлення.</p>
+        </div>
+        <div class="insight">
+          <b>Чому не «просто редизайн»?</b>
+          <p>Редизайн без даних — це нове обличчя тієї самої проблеми. Аудит спершу показує, що саме ламає продажі, і лише потім ви вкладаєте гроші в зміни — ті, що окупляться.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section id="who" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Для кого</p>
+      <h2>Три ситуації, коли аудит окупається першим</h2>
+    </div>
+    <div class="g2">
+      <div class="card rv">
+        <div class="n">01</div>
+        <h3>Трафік є, продажів мало</h3>
+        <p>Реклама крутиться, відвідувачі приходять, а конверсія не росте. Кошики кидають, віддачі від бюджету не видно. Аудит знаходить реальну причину — і вона майже ніколи одна.</p>
+      </div>
+      <div class="card rv">
+        <div class="n">02</div>
+        <h3>Магазин прибутковий, попереду масштабування</h3>
+        <p>Перед збільшенням бюджету або сезоном (Black Friday, свята) кожен відсоток конверсії множиться на весь трафік. Шукаємо резерви в середньому чеку, повторних покупках і checkout.</p>
+      </div>
+      <div class="card rv">
+        <div class="n">03</div>
+        <h3>Переїзд на Shopify або запуск бренду</h3>
+        <p>З Etsy, WooCommerce, Prom чи Хорошоп — коли будуєте магазин заново, дешевше одразу закласти правильний шлях покупця, ніж переробляти після запуску.</p>
+      </div>
+      <div class="card cta rv">
+        <div>
+          <h3>Не впевнені, що справа в конверсії?</h3>
+          <p style="margin-top:10px">20 хвилин розмови — і скажемо чесно: потрібен аудит, або спершу трафік, або у вас і так усе гаразд.</p>
+        </div>
+        <a class="btn dark" href="#order"><span>Записатись на 20 хвилин</span><i>↗</i></a>
+      </div>
+    </div>
+    <div class="honest rv">
+      <span style="font-size:20px;line-height:1">⚠️</span>
+      <div><b>Кому не підійде:</b> магазинам майже без трафіку. Немає поведінки — немає що аналізувати. Скажемо це на першому дзвінку й порадимо, з чого почати.</div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDED -->
+<section id="included" style="background:var(--s1);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Що входить</p>
+      <h2>Шість шарів, які проходимо в кожному аудиті</h2>
+      <p class="lead">Не «загальні рекомендації», а конкретні знахідки з вашого магазину — зі скрінами, даними та оцінкою, скільки це коштує вам щомісяця.</p>
+    </div>
+    <div class="inc">
+      <div class="card rv">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 15v-4M12 15V8M16 15v-6"/></svg></div>
+        <h3>Аналітика й воронка</h3>
+        <p>GA4, Shopify Analytics, записи сесій і теплові карти (Microsoft Clarity / Hotjar). Дивимось не на «середню температуру», а на конкретні кроки, де люди зупиняються — окремо на десктопі й на мобільному.</p>
+      </div>
+      <div class="card rv">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h12M3 17h8"/><circle cx="19" cy="16" r="2.5"/></svg></div>
+        <h3>Шлях покупця крок за кроком</h3>
+        <p>Головна, каталог і фільтри, пошук, картка товару, кошик, checkout, сторінка «дякуємо». Проходимо двічі: як покупець і як розробник.</p>
+      </div>
+      <div class="card rv">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 6h2l2.4 10.5a1 1 0 0 0 1 .8H18a1 1 0 0 0 1-.8L21 9H7"/><circle cx="9.5" cy="20" r="1"/><circle cx="17.5" cy="20" r="1"/></svg></div>
+        <h3>Checkout, оплата, доставка</h3>
+        <p>Несподівані витрати, обовʼязкова реєстрація, довгі форми, незрозумілі строки доставки — головні причини кинутих кошиків. Перевіряємо кожну й показуємо, як її прибрати.</p>
+      </div>
+      <div class="card rv">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+        <h3>Технічний шар і швидкість</h3>
+        <p>Core Web Vitals, вага сторінок, додатки, що гальмують тему, помилки JavaScript, коректність пікселів і подій. За потреби одразу лагодимо: дрібні правки — 24–72 години.</p>
+      </div>
+      <div class="card rv">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 4v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V7l7-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Контент, довіра, офер</h3>
+        <p>Ціннісна пропозиція, соціальні докази, політики повернення, тексти кнопок, відповідність реклами й посадкової. Те, що впливає на рішення купити, а не лише на зручність.</p>
+      </div>
+      <div class="card rv">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 16l4-5 3 3 5-7"/></svg></div>
+        <h3>Гіпотези з пріоритетами</h3>
+        <p>Кожну знахідку оцінюємо за впливом і складністю. Ви бачите, що дасть найбільше найшвидше, а що почекає до редизайну. Без «списку на 200 пунктів, робіть усе».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULT -->
+<section id="result">
+  <div class="wrap">
+    <div class="result rv">
+      <div class="bulb"></div>
+      <div>
+        <p class="eyebrow" style="color:#3a3a00">Результат аудиту</p>
+        <h2 style="margin-top:12px">Що ви отримуєте на руки</h2>
+        <p class="sub">Не презентацію «про важливість UX», а документ, з яким можна йти до розробника вже завтра.</p>
+      </div>
+      <div>
+        <ul>
+          <li><i>1</i><div><b>Звіт зі знахідками</b><span>Зі скрінами й поясненням: чому це проблема, скільки вона коштує, що робити.</span></div></li>
+          <li><i>2</i><div><b>Беклог змін із пріоритетами</b><span>Вплив × складність. Готовий до постановки задач розробнику — своєму або нам.</span></div></li>
+          <li><i>3</i><div><b>Quick wins на перший тиждень</b><span>Правки, які не потребують редизайну й дають ефект найшвидше.</span></div></li>
+          <li><i>4</i><div><b>Roadmap на 90 днів</b><span>Що тестуємо, в якому порядку, який ефект очікуємо і як його виміряти.</span></div></li>
+          <li><i>5</i><div><b>Дзвінок-розбір з Євгенієм</b><span>Проходимо звіт разом і відповідаємо на всі «а якщо».</span></div></li>
+        </ul>
+        <div class="foot">Звіт написаний так, щоб його зрозумів і власник, і розробник. Впроваджувати можна самим, своєю командою або з нами.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist" style="padding-top:0">
+  <div class="wrap">
+    <div class="chk-head">
+      <div class="sec-head" style="margin:0">
+        <p class="eyebrow">Що саме перевіряємо</p>
+        <h2>Повний перелік точок перевірки</h2>
+        <p class="lead">Щоб ви бачили, за що платите. Розгорніть будь-який блок.</p>
+      </div>
+      <div class="count"><span id="chk-count">70</span><small>ТОЧОК ПЕРЕВІРКИ</small></div>
+    </div>
+    <div class="acc rv">
+      <details>
+        <summary><span class="k">A</span>Аналітика й воронка<span class="c" data-c></span><span class="pl">+</span></summary>
+        <ol>
+          <li>Коректність GA4 і Shopify Analytics: чи не дублюються події, чи є подія покупки</li>
+          <li>Воронка головна → каталог → картка → кошик → checkout → оплата: де найбільший відвал</li>
+          <li>Різниця конверсії на десктопі й мобільному</li>
+          <li>Конверсія за джерелами трафіку: реклама, органіка, email, соцмережі</li>
+          <li>Записи сесій і теплові карти: куди клікають, де зупиняються, де «злі кліки»</li>
+          <li>Кинуті кошики: на якому кроці й після якої інформації</li>
+          <li>Пошук по сайту: що шукають і чого не знаходять</li>
+          <li>Повторні покупки: частка й що саме повертає клієнтів</li>
+        </ol>
+      </details>
+      <details>
+        <summary><span class="k">B</span>Головна сторінка й навігація<span class="c" data-c></span><span class="pl">+</span></summary>
+        <ol>
+          <li>Перший екран: за 5 секунд зрозуміло, що продаєте і кому</li>
+          <li>Один головний заклик до дії над лінією згину — і чи веде він туди, куди треба</li>
+          <li>Меню: кількість пунктів, зрозумілість назв, мобільна версія</li>
+          <li>Промо-банери й попапи: чи не перекривають шлях до покупки</li>
+          <li>Довіра на першому екрані: відгуки, рейтинги, доставка, гарантії</li>
+          <li>Швидкий шлях до бестселерів і новинок</li>
+          <li>Пошук: помітність, автопідказки, поведінка при нульовому результаті</li>
+          <li>Футер: політики, контакти, спосіб звʼязку</li>
+        </ol>
+      </details>
+      <details>
+        <summary><span class="k">C</span>Каталог і фільтри<span class="c" data-c></span><span class="pl">+</span></summary>
+        <ol>
+          <li>Структура категорій відповідає тому, як шукає покупець, а не як зручно складу</li>
+          <li>Фільтри й сортування: чи є потрібні, чи працюють на мобільному</li>
+          <li>Картки в списку: фото, ціна, знижка, наявність, варіанти</li>
+          <li>Пагінація, «показати ще» чи нескінченний скрол — що доречно саме тут</li>
+          <li>Швидкий перегляд і швидке додавання в кошик</li>
+          <li>Порожні або «тонкі» категорії</li>
+          <li>Бейджі «хіт», «новинка», «−20 %»: допомагають чи шумлять</li>
+          <li>Порядок товарів: чи зверху те, що найкраще конвертує</li>
+        </ol>
+      </details>
+      <details>
+        <summary><span class="k">D</span>Картка товару<span class="c" data-c></span><span class="pl">+</span></summary>
+        <ol>
+          <li>Фото: кількість, якість, зум, відео, товар у контексті використання</li>
+          <li>Ціна, знижка та економія — видно одразу, без калькулятора</li>
+          <li>Варіанти (розмір, колір): вибір без плутанини, наявність по кожному</li>
+          <li>Кнопка «Додати в кошик»: помітність, липкість на мобільному</li>
+          <li>Доставка й повернення прямо в картці, а не «десь у футері»</li>
+          <li>Відгуки з фото, відповіді на заперечення, питання-відповіді</li>
+          <li>Опис: перші два рядки продають, решта — деталі</li>
+          <li>Комплекти й «з цим купують»: крос-сел, який не заважає</li>
+          <li>Сигнали дефіциту й терміновості — чесні, без фейкових таймерів</li>
+          <li>Розмірна сітка, гайд з вибору, порівняння</li>
+        </ol>
+      </details>
+      <details>
+        <summary><span class="k">E</span>Кошик і checkout<span class="c" data-c></span><span class="pl">+</span></summary>
+        <ol>
+          <li>Кошик: видно склад, суму й доставку — без сюрпризів</li>
+          <li>Поріг безкоштовної доставки та прогрес до нього</li>
+          <li>Промокод: помітний, але не відправляє шукати купони в Google</li>
+          <li>Гостьове оформлення без обовʼязкової реєстрації</li>
+          <li>Кількість полів і кроків, автозаповнення адреси</li>
+          <li>Способи оплати: Shop Pay, Apple Pay, Google Pay, локальні методи вашого ринку</li>
+          <li>Вартість і строки доставки — до введення картки</li>
+          <li>Помилки форм: зрозумілі повідомлення, введене не губиться</li>
+          <li>Сторінка «дякуємо»: трекінг, апсел, підписка</li>
+          <li>Повернення кинутих кошиків: email / SMS-ланцюжки та їх таймінг</li>
+        </ol>
+      </details>
+      <details>
+        <summary><span class="k">F</span>Мобільна версія<span class="c" data-c></span><span class="pl">+</span></summary>
+        <ol>
+          <li>Розмір кнопок і відстань між ними: під палець, не під курсор</li>
+          <li>Липка кнопка покупки й доступ до кошика з будь-якого місця</li>
+          <li>Читабельність: розмір шрифту, контраст, довжина рядка</li>
+          <li>Фільтри й вибір варіантів на малому екрані</li>
+          <li>Попапи, які неможливо закрити з телефона</li>
+          <li>Горизонтальний скрол і «зламані» елементи</li>
+          <li>Швидкість на мобільному інтернеті, а не на офісному Wi-Fi</li>
+          <li>Шлях до оплати «одним великим пальцем»</li>
+        </ol>
+      </details>
+      <details>
+        <summary><span class="k">G</span>Швидкість і технічний шар<span class="c" data-c></span><span class="pl">+</span></summary>
+        <ol>
+          <li>Core Web Vitals (LCP, INP, CLS) на ключових шаблонах сторінок</li>
+          <li>Вага сторінок: зображення, відео, шрифти</li>
+          <li>Додатки Shopify: які «зʼїдають» швидкість і чи справді потрібні</li>
+          <li>Помилки JavaScript і зламані елементи теми</li>
+          <li>Биті посилання, сторінки 404, ланцюжки редиректів</li>
+          <li>Коректність Meta Pixel, GA4 та подій без дублювання</li>
+          <li>Індексація й базове SEO ключових сторінок: title, h1, canonical</li>
+          <li>Версія теми та «технічні борги» після минулих правок</li>
+          <li>Доступність: alt-тексти, контраст, навігація з клавіатури</li>
+        </ol>
+      </details>
+      <details>
+        <summary><span class="k">H</span>Контент, довіра, офер<span class="c" data-c></span><span class="pl">+</span></summary>
+        <ol>
+          <li>Ціннісна пропозиція: чому купити тут, а не в конкурента</li>
+          <li>Соціальні докази: відгуки, фото клієнтів, згадки, рейтинги — і де вони стоять</li>
+          <li>Політики доставки, повернення, гарантії — знайти за один клік</li>
+          <li>Контакти й живий канал звʼязку: видно, працює, відповідають</li>
+          <li>Мова й локалізація: валюта, одиниці, помилки перекладу</li>
+          <li>Тексти кнопок: «Купити» проти «Дізнатися більше»</li>
+          <li>Сторінка «Про нас»: обличчя, історія, чому вам довіряти</li>
+          <li>Збір email: форма чи попап, офер за підписку, момент показу</li>
+          <li>Узгодженість реклами й посадкової: обіцянка в оголошенні = те, що бачать на сайті</li>
+        </ol>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section id="steps" style="background:var(--s1);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="eyebrow">Етапи роботи</p>
+      <h2>Пʼять кроків від заявки до плану</h2>
+    </div>
+    <div class="tl">
+      <div class="step rv">
+        <div class="num">1</div>
+        <div class="box"><h3>Заявка і 20-хвилинна розмова</h3><p>Цілі, поточні цифри, що вже пробували. Домовляємось про формат і доступи: Shopify — колабораторський, аналітика — лише перегляд.</p></div>
+      </div>
+      <div class="step rv">
+        <div class="num">2</div>
+        <div class="box"><h3>Збір даних</h3><p>Підключаємо Microsoft Clarity, якщо його ще немає (безкоштовно), і за потреби даємо записам накопичитися. Паралельно вивантажуємо дані з GA4 і Shopify.</p></div>
+      </div>
+      <div class="step rv">
+        <div class="num">3</div>
+        <div class="box"><h3>Аудит</h3><p>Проходимо весь шлях покупця на десктопі та в телефоні, звіряємо з воронкою в даних, скануємо технічний шар — усі 70 точок перевірки.</p></div>
+      </div>
+      <div class="step rv">
+        <div class="num">4</div>
+        <div class="box"><h3>Гіпотези та пріоритети</h3><p>Кожна знахідка отримує оцінку впливу й складності. Окремо виносимо quick wins і те, що потребує редизайну. Принцип: гіпотеза → тест → висновок → впровадження.</p></div>
+      </div>
+      <div class="step rv">
+        <div class="num">5</div>
+        <div class="box"><h3>Передача та впровадження</h3><p>Звіт, беклог, roadmap і дзвінок-розбір. Далі впроваджуєте самі або ми: дрібні правки — 24–72 години, редизайн ключових сторінок — 2–4 тижні.</p></div>
+      </div>
+    </div>
+    <div class="tl-foot rv">
+      <span class="pill tbc" data-why="Строк аудиту на сайті не вказаний — Євгеній має назвати реальний (напр. 7–10 робочих днів)">⏱ Від доступів до звіту: <b>[строк — уточнити]</b></span>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATS -->
+<section id="formats">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Формати</p>
+      <h2>Три формати. Ціни — відкрито.</h2>
+      <p class="lead">Ринок ховає вартість до «дзвінка з менеджером». Ми вважаємо, що ви маєте право знати цифру до того, як витратите на нас годину.</p>
+    </div>
+    <div class="plans">
+      <div class="plan rv">
+        <div class="tag">Крок 0</div>
+        <div class="price">Безкоштовно<small><span class="tbc" data-why="Тривалість консультації — пропозиція, узгодити з Євгенієм">20 хвилин</span> у Zoom або Telegram</small></div>
+        <p>Дивимось магазин разом і кажемо чесно: потрібен аудит, чи спершу трафік, чи у вас і так усе гаразд. Без презентацій і тиску.</p>
+        <ul>
+          <li>Погляд на головну, картку товару і checkout</li>
+          <li>Чесна відповідь: аудит / трафік / усе гаразд</li>
+          <li>Орієнтир по вартості й строках одразу</li>
+        </ul>
+        <a class="btn ghost" href="#order"><span>Записатись</span><i>↗</i></a>
+      </div>
+      <div class="plan feat rv">
+        <div class="tag">Основний формат</div>
+        <div class="price"><span class="tbc" data-why="Ціна аудиту не підтверджена — Євгеній має дати фіксовану вартість (за стратегією лідгену ціни публікуємо відкрито)">$ [ціна — уточнити]</span><small>фіксована вартість, без доплат</small></div>
+        <p>Повний прохід по 70 точках, дані, гіпотези з пріоритетами, roadmap і дзвінок-розбір. Той самий формат, що описаний на цій сторінці.</p>
+        <ul>
+          <li>Аналітика, записи сесій, теплові карти</li>
+          <li>Десктоп і мобільна версія окремо</li>
+          <li>Звіт + беклог + quick wins + roadmap на 90 днів</li>
+          <li>Дзвінок-розбір з Євгенієм</li>
+          <li>Звіт українською або англійською</li>
+        </ul>
+        <a class="btn lime" href="#order"><span>Отримати план аудиту</span><i>↗</i></a>
+      </div>
+      <div class="plan rv">
+        <div class="tag">Аудит + впровадження</div>
+        <div class="price">Фікс за беклогом<small>кошторис після аудиту, не «приблизно»</small></div>
+        <p>Ми ж і впроваджуємо: одна команда знаходить проблему й закриває її. Без переказування контексту сторонньому розробнику.</p>
+        <ul>
+          <li>Quick wins — 24–72 години</li>
+          <li>Редизайн ключових сторінок — 2–4 тижні</li>
+          <li>Оптимізація швидкості й додатків</li>
+          <li>Вимірюємо ефект після кожної хвилі змін</li>
+        </ul>
+        <a class="btn ghost" href="#order"><span>Обговорити</span><i>↗</i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO DOES IT -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="who rv">
+      <div class="ava">Є</div>
+      <div>
+        <p class="eyebrow" style="margin-bottom:8px">Хто проводить аудит</p>
+        <h3>Євгеній, засновник MileDevs</h3>
+        <p>5+ років у Shopify, <span class="tbc" data-why="Цифра з сайту — підтвердити">100+</span> магазинів, Shopify Selected Partner. Дивиться на магазин і як розробник, і як власник бізнесу: не «що можна покращити», а «що дасть гроші першим». Ви говорите з тим, хто робитиме роботу, а не з менеджером із продажів.</p>
+      </div>
+      <a class="btn ghost" href="https://t.me/shopify_evgene" target="_blank" rel="noopener"><span>Telegram</span><i>↗</i></a>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section id="cases" style="background:var(--s1);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Кейси та відгуки</p>
+      <h2>Цифри замість обіцянок</h2>
+    </div>
+    <div class="case-feat rv">
+      <a class="img" href="https://www.miledevs.com/pages/case-lunesi" target="_blank" rel="noopener"><img src="https://www.miledevs.com/cdn/shop/files/251211_Lunesi_catalogue1949_2.webp?v=1766428636&width=1200" alt="LUNESI — преміальний догляд за волоссям, Shopify-магазин" loading="lazy"></a>
+      <div class="txt">
+        <div>
+          <div class="kpi">+35%<small>конверсії в перший місяць після запуску</small></div>
+          <p class="quote" style="margin-top:22px">Ми запускали преміальний догляд за волоссям на Shopify, і ви впорались на 100 %: мультимовність для UK та Європи працює бездоганно, логістика інтегрована як годинник, а конверсія зросла на 35 % у перший місяць.</p>
+        </div>
+        <div class="byline"><b>LUNESI · догляд за волоссям, UK/EU</b>Мультивалютний магазин, доставка в 30+ країн, комплекти, квіз підбору · <a href="https://www.miledevs.com/pages/case-lunesi" target="_blank" rel="noopener" class="lime">кейс повністю ↗</a></div>
+      </div>
+    </div>
+    <div class="testi">
+      <div class="card rv tbc" data-why="Відгук узято з сайту miledevs.com (розділ Client Success Stories). Підтвердити, що клієнт реальний і погодив публікацію українською">
+        <div class="kpi">+52%<small>конверсії</small></div>
+        <p class="quote">Вони не просто зібрали Shopify-магазин — вони побудували систему, яка реально продає. Від UX до checkout кожна деталь була продумана.</p>
+        <div class="byline"><b>Daniel Foster</b>Засновник · North &amp; Co.</div>
+      </div>
+      <div class="card rv tbc" data-why="Відгук узято з сайту miledevs.com. Підтвердити реальність і дозвіл на переклад">
+        <div class="kpi">1.9×<small>середній чек</small></div>
+        <p class="quote">Ми прийшли з хаотичним каталогом і нульовою структурою. Команда все переорганізувала, оптимізувала магазин і зробила чистий преміальний досвід, який нарешті відповідає бренду.</p>
+        <div class="byline"><b>Isabella Moretti</b>Head of E-commerce · Luma Skin</div>
+      </div>
+      <div class="card rv tbc" data-why="Відгук узято з сайту miledevs.com. Підтвердити реальність і дозвіл на переклад">
+        <div class="kpi">+63%<small>онлайн-виторгу</small></div>
+        <p class="quote">Швидко, точно й неймовірно легко в роботі. Вони зрозуміли наш ринок, закрили технічну частину й видали магазин, який працює так само добре, як виглядає.</p>
+        <div class="byline"><b>Marcus Reed</b>CEO · Field Supply Co.</div>
+      </div>
+    </div>
+    <div class="port rv">
+      <a href="https://www.miledevs.com/pages/case-lunesi" target="_blank" rel="noopener"><img src="https://www.miledevs.com/cdn/shop/files/251211_Lunesi_catalogue1949_2.webp?v=1766428636&width=600" alt="LUNESI" loading="lazy"><div class="cap">LUNESI<small>Догляд за волоссям · повний цикл</small></div></a>
+      <a href="https://www.miledevs.com/pages/case-joyfolie" target="_blank" rel="noopener"><img src="https://www.miledevs.com/cdn/shop/files/the-holiday-collection-01_2046x1221_45709757-1a5c-4a79-a874-2d9f38679535.webp?width=600" alt="JOYFOLIE" loading="lazy"><div class="cap">JOYFOLIE<small>Одяг і взуття · повний цикл</small></div></a>
+      <a href="https://www.miledevs.com/pages/case-rinfit" target="_blank" rel="noopener"><img src="https://www.miledevs.com/cdn/shop/files/MIX14_510x_2x.progressive_6e087fe6-82b4-414c-837a-25e348ada529.webp?v=1766428910&width=600" alt="RINFIT" loading="lazy"><div class="cap">RINFIT<small>Аксесуари · повний цикл</small></div></a>
+      <a href="https://www.miledevs.com/pages/case-carbon" target="_blank" rel="noopener"><img src="https://www.miledevs.com/cdn/shop/files/OEM-Style-Carbon-Fiber-Mirror-Cap-Set-Audi-RS5S5A5-B9B9_5.webp?v=1766429550&width=600" alt="CARBON" loading="lazy"><div class="cap">CARBON<small>Автотюнінг · повний цикл</small></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="eyebrow">Питання</p>
+      <h2>Що зазвичай запитують до старту</h2>
+    </div>
+    <div class="faq rv">
+      <details>
+        <summary>Чи потрібно давати доступ до адмінки Shopify?<i>+</i></summary>
+        <div class="a">Так, але не власницький. У Shopify є колабораторський доступ — ви самі обираєте, які розділи ми бачимо, і можете забрати його в будь-який момент. Аналітику підключаємо в режимі перегляду.</div>
+      </details>
+      <details>
+        <summary>У мене магазин не на Shopify. Підійде?<i>+</i></summary>
+        <div class="a">Ми працюємо тільки з Shopify — це наша спеціалізація. Якщо ви на WooCommerce, Prom чи Хорошоп і думаєте про переїзд, аудит стане технічним завданням для нового магазину: ви не перенесете старі помилки на нову платформу.</div>
+      </details>
+      <details>
+        <summary>Скільки триває аудит?<i>+</i></summary>
+        <div class="a"><span class="tbc" data-why="Строк — уточнити в Євгенія">[строк — уточнити]</span> від отримання доступів до звіту. Якщо потрібно накопичити записи сесій, додаємо час на збір даних — про це домовляємось на першому дзвінку, а не постфактум.</div>
+      </details>
+      <details>
+        <summary>Ви самі впроваджуєте зміни?<i>+</i></summary>
+        <div class="a">Так, за вашим бажанням. Дрібні правки — 24–72 години, редизайн ключових сторінок — 2–4 тижні. Але звіт написаний так, що впровадити його може будь-який Shopify-розробник — ви не привʼязані до нас.</div>
+      </details>
+      <details>
+        <summary>Ви гарантуєте зростання конверсії?<i>+</i></summary>
+        <div class="a">Ні — і остерігайтесь тих, хто гарантує. Конверсія залежить ще й від продукту, ціни та трафіку. Гарантуємо інше: кожна рекомендація має обґрунтування даними, оцінку ефекту й пріоритет. Що і як швидко впроваджувати — вирішуєте ви.</div>
+      </details>
+      <details>
+        <summary>У мене мало трафіку. Є сенс?<i>+</i></summary>
+        <div class="a">Якщо відвідувачів майже немає, аналізувати поведінку нема на чому. Скажемо це чесно на консультації й порадимо, з чого почати — можливо, з трафіку, а не з аудиту. Продавати аудит, який нічого не покаже, нам невигідно: ви не повернетесь.</div>
+      </details>
+      <details>
+        <summary>Якою мовою буде звіт?<i>+</i></summary>
+        <div class="a">Українською або англійською — як зручніше вашій команді. Працюємо з магазинами в Україні та з українськими підприємцями за кордоном, які продають на європейський і американський ринок.</div>
+      </details>
+      <details>
+        <summary>Треба щось встановлювати на сайт?<i>+</i></summary>
+        <div class="a">Максимум один скрипт Microsoft Clarity, якщо його ще немає — він безкоштовний і не впливає на швидкість. Усе інше — на нашому боці.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section class="order" id="order">
+  <div class="wrap">
+    <div class="order-grid">
+      <div>
+        <p class="eyebrow" style="color:#3a3a00">Як замовити</p>
+        <h2 style="margin-top:12px">Залиште заявку — відповімо протягом години</h2>
+        <p class="lead" style="margin-top:18px">Або напишіть Євгенію напряму в Telegram чи WhatsApp. У робочий час відповідаємо до години, а не «протягом трьох робочих днів».</p>
+        <p class="lead">На першій безкоштовній консультації дивимось ваш магазин, поточні цифри й цілі. Кажемо, чи проблема справді в конверсії та які точки росту пріоритетні саме у вас. Далі — формат, строки, ціна. Без сюрпризів на checkout.</p>
+        <div class="contacts">
+          <a href="https://t.me/shopify_evgene" target="_blank" rel="noopener">✈ Telegram</a>
+          <a href="https://wa.me/380730071077" target="_blank" rel="noopener">✆ WhatsApp</a>
+          <a href="mailto:miledevelopment@gmail.com">✉ miledevelopment@gmail.com</a>
+        </div>
+      </div>
+      <form class="form" id="leadForm" novalidate>
+        <h3>Заявка на аудит</h3>
+        <p class="hint">Три поля — і ми вже дивимось на ваш магазин до дзвінка.</p>
+        <div class="row">
+          <label>Імʼя*<input type="text" name="name" placeholder="Як до вас звертатись" required></label>
+          <label>Telegram або телефон*<input type="text" name="contact" placeholder="@username або +380…" required></label>
+        </div>
+        <label>Адреса магазину<input type="url" name="store" placeholder="https://вашмагазин.com"></label>
+        <label>Що болить найбільше
+          <select name="pain">
+            <option value="">Оберіть варіант</option>
+            <option>Трафік є — продажів мало</option>
+            <option>Кидають кошики на checkout</option>
+            <option>Повільний магазин на мобільному</option>
+            <option>Готуюсь до сезону / масштабування</option>
+            <option>Переїжджаю на Shopify</option>
+            <option>Не знаю — хочу чесний погляд збоку</option>
+          </select>
+        </label>
+        <label>Коментар<textarea name="msg" placeholder="Місячний трафік, рекламний бюджет, що вже пробували — усе, що допоможе підготуватись до розмови"></textarea></label>
+        <div class="actions">
+          <button type="submit" class="btn lime" data-via="tg"><span>Надіслати в Telegram</span><i>↗</i></button>
+          <button type="submit" class="btn dark" data-via="wa"><span>Надіслати у WhatsApp</span><i>↗</i></button>
+        </div>
+        <p class="fine">Натискаючи кнопку, ви відкриваєте чат із готовим текстом заявки. Ніяких розсилок — лише відповідь по вашому магазину.</p>
+        <div class="ok" id="okMsg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <h4>Послуги</h4>
+        <ul>
+          <li><a href="https://www.miledevs.com/pages/services">Shopify-магазин з нуля</a></li>
+          <li><a href="https://www.miledevs.com/pages/services">Кастомний дизайн Shopify</a></li>
+          <li><a href="https://www.miledevs.com/pages/services">Міграція на Shopify</a></li>
+          <li><a href="https://www.miledevs.com/pages/services">Оптимізація швидкості</a></li>
+          <li><a href="https://www.miledevs.com/pages/services">Підтримка й супровід</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Кейси</h4>
+        <ul>
+          <li><a href="https://www.miledevs.com/pages/case-lunesi">LUNESI — догляд за волоссям</a></li>
+          <li><a href="https://www.miledevs.com/pages/case-joyfolie">JOYFOLIE — одяг і взуття</a></li>
+          <li><a href="https://www.miledevs.com/pages/case-rinfit">RINFIT — аксесуари</a></li>
+          <li><a href="https://www.miledevs.com/pages/case-carbon">CARBON — автотюнінг</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ресурси</h4>
+        <ul>
+          <li><a href="https://www.miledevs.com/blogs/news">Блог</a></li>
+          <li><a href="https://www.miledevs.com/pages/resources">Ресурси</a></li>
+          <li><a href="https://www.miledevs.com/pages/about-us">Про нас</a></li>
+          <li><a href="https://www.miledevs.com/pages/privacy-policy">Політика конфіденційності</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Контакти</h4>
+        <ul>
+          <li><a href="https://t.me/shopify_evgene">Telegram</a></li>
+          <li><a href="https://wa.me/380730071077">WhatsApp +380 73 007 10 77</a></li>
+          <li><a href="mailto:miledevelopment@gmail.com">miledevelopment@gmail.com</a></li>
+          <li><a href="https://www.miledevs.com/">miledevs.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bot">
+      <span class="wordmark" style="font-size:18px">MILEDEVS</span>
+      <span>© 2026 MILEDEVS. Всі права захищено. Shopify Selected Partner.</span>
+      <span class="lang"><a href="https://www.miledevs.com/">EN</a> | <b>UK</b></span>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" href="https://t.me/shopify_evgene" target="_blank" rel="noopener" aria-label="Написати в Telegram">
+  <svg viewBox="0 0 24 24"><path d="M9.04 15.47l-.37 5.2c.53 0 .76-.23 1.04-.5l2.5-2.4 5.18 3.8c.95.52 1.63.25 1.88-.88l3.4-15.95c.31-1.4-.5-1.95-1.43-1.6L1.7 10.4c-1.37.53-1.35 1.3-.23 1.64l5.1 1.6L18.4 6.2c.56-.37 1.07-.16.65.2L9.04 15.47z"/></svg>
+</a>
+
+<!-- ЧЕРНЕТКА: блок перевірки — видалити перед публікацією на сайті -->
+<div id="review" hidden>
+  <span>На підтвердження Євгенію: <b id="tbcN">0</b></span>
+  <button type="button" id="tbcToggle">Показати</button>
+  <button type="button" class="x" id="tbcClose" aria-label="Сховати">✕</button>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"Service","name":"CRO та UI/UX аудит Shopify-магазину","serviceType":"Conversion Rate Optimization audit","provider":{"@type":"Organization","name":"MileDevs","url":"https://www.miledevs.com/","email":"miledevelopment@gmail.com"},"areaServed":["UA","EU","US"],"description":"Глибокий CRO та UI/UX аудит Shopify-магазину: 70 точок перевірки, аналітика й записи сесій, гіпотези з пріоритетами, quick wins і roadmap на 90 днів."},
+ {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Головна","item":"https://www.miledevs.com/uk"},{"@type":"ListItem","position":2,"name":"Послуги","item":"https://www.miledevs.com/pages/services"},{"@type":"ListItem","position":3,"name":"CRO та UI/UX аудит"}]},
+ {"@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"Чи потрібно давати доступ до адмінки Shopify?","acceptedAnswer":{"@type":"Answer","text":"Так, але не власницький. У Shopify є колабораторський доступ — ви самі обираєте, які розділи ми бачимо. Аналітику підключаємо в режимі перегляду."}},
+  {"@type":"Question","name":"У мене магазин не на Shopify. Підійде?","acceptedAnswer":{"@type":"Answer","text":"Ми працюємо тільки з Shopify. Якщо плануєте переїзд з WooCommerce, Prom чи Хорошоп, аудит стане технічним завданням для нового магазину."}},
+  {"@type":"Question","name":"Ви гарантуєте зростання конверсії?","acceptedAnswer":{"@type":"Answer","text":"Ні. Гарантуємо, що кожна рекомендація має обґрунтування даними, оцінку ефекту й пріоритет."}},
+  {"@type":"Question","name":"Ви самі впроваджуєте зміни?","acceptedAnswer":{"@type":"Answer","text":"Так, за бажанням: дрібні правки — 24–72 години, редизайн ключових сторінок — 2–4 тижні."}}
+ ]}
+]}
+</script>
+
+<script>
+// count checklist items honestly
+(function(){
+  var all=0;
+  document.querySelectorAll('.acc details').forEach(function(d){
+    var n=d.querySelectorAll('ol li').length; all+=n;
+    var c=d.querySelector('[data-c]'); if(c) c.textContent=n+' пункт'+(n%10===1&&n%100!==11?'':(n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)?'и':'ів'));
+  });
+  var el=document.getElementById('chk-count'); if(el) el.textContent=all;
+})();
+
+// scroll reveal
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+
+// lead form → Telegram (copy + open) / WhatsApp (prefilled)
+(function(){
+  var f=document.getElementById('leadForm'); if(!f) return;
+  var via='tg';
+  f.querySelectorAll('button[type=submit]').forEach(function(b){b.addEventListener('click',function(){via=b.getAttribute('data-via')})});
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var d=new FormData(f);
+    var name=(d.get('name')||'').trim(), contact=(d.get('contact')||'').trim();
+    var ok=document.getElementById('okMsg');
+    if(!name||!contact){ok.textContent='Заповніть імʼя та контакт — інакше нам нікому відповісти.';ok.classList.add('show');return;}
+    var lines=['Заявка на CRO/UX-аудит','Імʼя: '+name,'Контакт: '+contact];
+    if(d.get('store')) lines.push('Магазин: '+d.get('store'));
+    if(d.get('pain')) lines.push('Що болить: '+d.get('pain'));
+    if(d.get('msg')) lines.push('Коментар: '+String(d.get('msg')).trim());
+    var text=lines.join('\n');
+    if(via==='wa'){
+      window.open('https://wa.me/380730071077?text='+encodeURIComponent(text),'_blank','noopener');
+      ok.textContent='Відкрили WhatsApp із готовим текстом заявки. Відповімо протягом години в робочий час.';
+    } else {
+      var done=function(){window.open('https://t.me/shopify_evgene','_blank','noopener');ok.textContent='Текст заявки скопійовано — вставте його в чат Telegram, який щойно відкрився. Відповімо протягом години.';ok.classList.add('show');};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,done);} else {done();}
+      return;
+    }
+    ok.classList.add('show');
+  });
+})();
+
+// review mode (draft only)
+(function(){
+  var items=document.querySelectorAll('.tbc'), box=document.getElementById('review');
+  if(!box||!items.length) return;
+  box.hidden=false; document.getElementById('tbcN').textContent=items.length;
+  var t=document.getElementById('tbcToggle');
+  t.addEventListener('click',function(){var on=document.body.classList.toggle('review');t.textContent=on?'Сховати':'Показати';});
+  document.getElementById('tbcClose').addEventListener('click',function(){box.hidden=true;document.body.classList.remove('review');});
+})();
+</script>
+</body>
+</html>
