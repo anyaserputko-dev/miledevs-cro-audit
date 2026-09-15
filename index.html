@@ -310,15 +310,6 @@ footer:before{content:"";position:absolute;right:-220px;top:-260px;width:520px;h
 .fab:hover{transform:scale(1.06)}
 .fab svg{width:26px;height:26px;fill:#fff}
 
-/* review mode (draft only — remove #review block for production) */
-#review{position:fixed;left:18px;top:96px;z-index:60;display:flex;gap:6px;align-items:center;background:#fff;border:1px solid var(--grey);border-radius:999px;padding:6px 6px 6px 14px;font-size:12.5px;color:var(--text);box-shadow:var(--shadow-2)}
-#review button{font:600 12px var(--f);border:0;border-radius:999px;padding:8px 12px;cursor:pointer;background:var(--orange);color:#fff}
-#review button.x{background:transparent;color:var(--muted);padding:8px 8px}
-.tbc{position:relative}
-body.review .tbc{outline:2px dotted var(--orange);outline-offset:3px;border-radius:4px;cursor:help}
-body.review .tbc:after{content:attr(data-why);position:absolute;left:0;top:calc(100% + 8px);background:var(--text);color:#fff;font:500 11px/1.35 var(--f);padding:6px 9px;border-radius:6px;white-space:normal;width:max-content;max-width:280px;z-index:20;opacity:0;pointer-events:none;transition:opacity .15s}
-body.review .tbc:hover:after{opacity:1}
-
 /* reveal */
 .rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
 .rv.in{opacity:1;transform:none}
@@ -376,7 +367,6 @@ body.review .tbc:hover:after{opacity:1}
   .ph.b{left:150px;top:50px}
   .result .bulb{right:-8px;top:-24px;width:54px;height:54px}
   .count{text-align:left}
-  #review{top:auto;bottom:84px}
   .fab{right:14px;bottom:14px}
   .f-bot .copy{margin-left:0;width:100%}
 }
@@ -738,7 +728,7 @@ body.review .tbc:hover:after{opacity:1}
       <div class="step rv"><div class="num">4</div><div class="box"><h3>Гіпотези та пріоритети</h3><p>Кожна знахідка отримує оцінку впливу й складності. Окремо виносимо quick wins і те, що потребує редизайну. Принцип: гіпотеза — тест — висновок — впровадження.</p></div></div>
       <div class="step rv"><div class="num">5</div><div class="box"><h3>Передача звіту та впровадження</h3><p>Звіт, беклог, roadmap і дзвінок-розбір. Далі впроваджуєте самі або ми: дрібні правки — 24–72 години, редизайн ключових сторінок — 2–4 тижні.</p></div></div>
     </div>
-    <div class="tl-foot rv"><span class="pillbox tbc" data-why="Строк аудиту на сайті не вказаний — Євгеній має назвати реальний (напр. 7–10 робочих днів)">⏱ Від доступів до звіту: <small>[строк — уточнити]</small></span></div>
+    <div class="tl-foot rv"><span class="pillbox" data-x="Строк аудиту на сайті не вказаний — Євгеній має назвати реальний (напр. 7–10 робочих днів)">⏱ Від доступів до звіту: <small>[строк — уточнити]</small></span></div>
   </div>
 </section>
 
@@ -749,7 +739,7 @@ body.review .tbc:hover:after{opacity:1}
     <div class="plans">
       <div class="plan rv">
         <span class="tag">Крок 0</span>
-        <div class="price">Безкоштовно<small><span class="tbc" data-why="Тривалість консультації — пропозиція, узгодити з Євгенієм">20 хвилин</span> у Zoom або Telegram</small></div>
+        <div class="price">Безкоштовно<small><span>20 хвилин</span> у Zoom або Telegram</small></div>
         <p>Дивимось магазин разом і кажемо чесно: потрібен аудит, чи спершу трафік, чи у вас і так усе гаразд. Без презентацій і тиску.</p>
         <ul class="diamond">
           <li>Погляд на головну, картку товару і checkout</li>
@@ -760,7 +750,7 @@ body.review .tbc:hover:after{opacity:1}
       </div>
       <div class="plan feat rv">
         <span class="tag">Основний формат</span>
-        <div class="price"><span class="tbc" data-why="Ціна аудиту не підтверджена — Євгеній має дати фіксовану вартість (за стратегією лідгену ціни публікуємо відкрито)">$ [ціна — уточнити]</span><small>фіксована вартість, без доплат</small></div>
+        <div class="price"><span>$ [ціна — уточнити]</span><small>фіксована вартість, без доплат</small></div>
         <p>Повний прохід по 70 точках, дані, гіпотези з пріоритетами, roadmap і дзвінок-розбір. Той самий формат, що описаний на цій сторінці.</p>
         <ul class="diamond">
           <li>Аналітика, записи сесій, теплові карти</li>
@@ -811,7 +801,7 @@ body.review .tbc:hover:after{opacity:1}
           <span class="lab">Повний цикл: магазин, 30+ країн доставки, комплекти, квіз</span>
         </div>
       </div>
-      <div class="tcard rv tbc" data-why="Відгук узято з сайту miledevs.com (Client Success Stories). Підтвердити, що клієнт реальний і погодив публікацію українською">
+      <div class="tcard rv" data-x="Відгук узято з сайту miledevs.com (Client Success Stories). Підтвердити, що клієнт реальний і погодив публікацію українською">
         <div class="thumb"><img src="https://www.miledevs.com/cdn/shop/files/the-holiday-collection-01_2046x1221_45709757-1a5c-4a79-a874-2d9f38679535.webp?width=900" alt="" loading="lazy"><div class="kpi">+52%<small>конверсії</small></div></div>
         <div class="body">
           <div class="q">“</div>
@@ -821,7 +811,7 @@ body.review .tbc:hover:after{opacity:1}
           <span class="lab">Розробка й оптимізація конверсії</span>
         </div>
       </div>
-      <div class="tcard rv tbc" data-why="Відгук узято з сайту miledevs.com. Підтвердити реальність і дозвіл на переклад">
+      <div class="tcard rv" data-x="Відгук узято з сайту miledevs.com. Підтвердити реальність і дозвіл на переклад">
         <div class="thumb"><img src="https://www.miledevs.com/cdn/shop/files/OEM-Style-Carbon-Fiber-Mirror-Cap-Set-Audi-RS5S5A5-B9B9_5.webp?v=1766429550&width=900" alt="" loading="lazy"><div class="kpi">+63%<small>онлайн-виторгу</small></div></div>
         <div class="body">
           <div class="q">“</div>
@@ -848,7 +838,7 @@ body.review .tbc:hover:after{opacity:1}
     <div class="faq rv">
       <details><summary>Чи потрібно давати доступ до адмінки Shopify?<i>+</i></summary><div class="a">Так, але не власницький. У Shopify є колабораторський доступ — ви самі обираєте, які розділи ми бачимо, і можете забрати його в будь-який момент. Аналітику підключаємо в режимі перегляду.</div></details>
       <details><summary>У мене магазин не на Shopify. Підійде?<i>+</i></summary><div class="a">Ми працюємо тільки з Shopify — це наша спеціалізація. Якщо ви на WooCommerce, Prom чи Хорошоп і думаєте про переїзд, аудит стане технічним завданням для нового магазину: ви не перенесете старі помилки на нову платформу.</div></details>
-      <details><summary>Скільки триває аудит?<i>+</i></summary><div class="a"><span class="tbc" data-why="Строк — уточнити в Євгенія">[строк — уточнити]</span> від отримання доступів до звіту. Якщо потрібно накопичити записи сесій, додаємо час на збір даних — про це домовляємось на першому дзвінку, а не постфактум.</div></details>
+      <details><summary>Скільки триває аудит?<i>+</i></summary><div class="a"><span>[строк — уточнити]</span> від отримання доступів до звіту. Якщо потрібно накопичити записи сесій, додаємо час на збір даних — про це домовляємось на першому дзвінку, а не постфактум.</div></details>
       <details><summary>Ви самі впроваджуєте зміни?<i>+</i></summary><div class="a">Так, за вашим бажанням. Дрібні правки — 24–72 години, редизайн ключових сторінок — 2–4 тижні. Але звіт написаний так, що впровадити його може будь-який Shopify-розробник — ви не привʼязані до нас.</div></details>
       <details><summary>Ви гарантуєте зростання конверсії?<i>+</i></summary><div class="a">Ні — і остерігайтесь тих, хто гарантує. Конверсія залежить ще й від продукту, ціни та трафіку. Гарантуємо інше: кожна рекомендація має обґрунтування даними, оцінку ефекту й пріоритет. Що і як швидко впроваджувати — вирішуєте ви.</div></details>
       <details><summary>У мене мало трафіку. Є сенс?<i>+</i></summary><div class="a">Якщо відвідувачів майже немає, аналізувати поведінку нема на чому. Скажемо це чесно на консультації й порадимо, з чого почати — можливо, з трафіку, а не з аудиту. Продавати аудит, який нічого не покаже, нам невигідно: ви не повернетесь.</div></details>
@@ -1005,12 +995,7 @@ body.review .tbc:hover:after{opacity:1}
   <svg viewBox="0 0 24 24"><path d="M9.04 15.47l-.37 5.2c.53 0 .76-.23 1.04-.5l2.5-2.4 5.18 3.8c.95.52 1.63.25 1.88-.88l3.4-15.95c.31-1.4-.5-1.95-1.43-1.6L1.7 10.4c-1.37.53-1.35 1.3-.23 1.64l5.1 1.6L18.4 6.2c.56-.37 1.07-.16.65.2L9.04 15.47z"/></svg>
 </a>
 
-<!-- ЧЕРНЕТКА: блок перевірки — видалити перед публікацією на сайті -->
-<div id="review" hidden>
-  <span>На підтвердження Євгенію: <b id="tbcN">0</b></span>
-  <button type="button" id="tbcToggle">Показати</button>
-  <button type="button" class="x" id="tbcClose" aria-label="Сховати">✕</button>
-</div>
+
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
@@ -1064,14 +1049,7 @@ body.review .tbc:hover:after{opacity:1}
     ok.textContent='Відкрили WhatsApp із готовим текстом заявки. Відповімо протягом години в робочий час.';ok.classList.add('show');
   });
 })();
-(function(){
-  var items=document.querySelectorAll('.tbc'), box=document.getElementById('review');
-  if(!box||!items.length) return;
-  box.hidden=false; document.getElementById('tbcN').textContent=items.length;
-  var t=document.getElementById('tbcToggle');
-  t.addEventListener('click',function(){var on=document.body.classList.toggle('review');t.textContent=on?'Сховати':'Показати';});
-  document.getElementById('tbcClose').addEventListener('click',function(){box.hidden=true;document.body.classList.remove('review');});
-})();
+
 </script>
 </body>
 </html>
