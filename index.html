@@ -31,6 +31,7 @@ h2{font-size:clamp(28px,3.4vw,44px)}
 h3{font-size:18px;line-height:1.35}
 p{margin:0}
 .wrap{max-width:1180px;margin:0 auto;padding-inline:clamp(16px,4vw,40px);position:relative}
+main{position:relative;overflow:hidden}
 section{position:relative;padding-block:clamp(52px,7vw,92px)}
 .title{text-align:center;margin-bottom:clamp(30px,4vw,54px)}
 .title.left{text-align:left}
@@ -53,7 +54,11 @@ b,strong{color:var(--text);font-weight:700}
 /* decorations */
 .dots{position:absolute;width:150px;height:190px;pointer-events:none;background-image:radial-gradient(#D6D6D6 2.2px,transparent 2.8px);background-size:22px 22px;opacity:.9}
 .dots.y{background-image:radial-gradient(#1800ad 2.2px,transparent 2.8px)}
-.blob{position:absolute;pointer-events:none;background:var(--yellow-soft);border-radius:50%}
+.wave{position:absolute;pointer-events:none;z-index:0}
+.wave svg{width:100%;height:100%;display:block}
+.wave path{fill:var(--yellow-soft)}
+.wave.l{left:0;top:80%;width:340px;height:1500px}
+.wave.r{right:0;top:14%;width:300px;height:1300px}
 .card{background:#fff;border:1px solid var(--grey);border-radius:var(--r);box-shadow:var(--shadow);padding:30px 32px}
 .card h3{margin-bottom:12px}
 .card p{color:var(--body);font-size:15.5px}
@@ -85,8 +90,7 @@ header{background:#fff;position:sticky;top:0;z-index:50;box-shadow:0 1px 0 rgba(
 .crumbs a{color:var(--text)}.crumbs a:hover{color:var(--orange)}
 
 /* hero */
-.hero{padding-block:34px 90px;overflow:hidden}
-.hero .blob.l{left:-300px;bottom:-400px;width:560px;height:560px}
+.hero{padding-block:34px 90px}
 .hero .dots.r{right:0;top:20px}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center;margin-top:40px}
 .hero-grid>*{min-width:0;max-width:100%}
@@ -154,8 +158,7 @@ h1{font-size:clamp(30px,3.6vw,46px);line-height:1.2;margin-bottom:24px}
 .note b{display:block;margin-bottom:4px}
 
 /* for whom */
-.who{overflow:hidden}
-.who .blob.l{left:-330px;top:-40px;width:520px;height:620px;border-radius:48% 52% 55% 45% / 50% 45% 55% 50%}
+.who{}
 .who .dots.r{right:0;top:40px}
 .g2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
 .card.center{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px}
@@ -163,8 +166,7 @@ h1{font-size:clamp(30px,3.6vw,46px);line-height:1.2;margin-bottom:24px}
 .honest{margin-top:24px;display:flex;gap:14px;align-items:flex-start;padding:18px 22px;border:1.5px dashed #B9B3F0;background:#F6F5FF;border-radius:16px;color:var(--body);font-size:15px}
 
 /* included */
-.inc{overflow:hidden}
-.inc .blob.r{right:-300px;top:160px;width:440px;height:520px;border-radius:55% 45% 50% 50% / 45% 55% 45% 55%}
+.inc{}
 .inc .dots.y{left:0;bottom:120px}
 .inc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,5vw,70px);align-items:start}
 .inc-list p{margin-bottom:20px;font-size:16px;line-height:1.55}
@@ -197,9 +199,8 @@ h1{font-size:clamp(30px,3.6vw,46px);line-height:1.2;margin-bottom:24px}
 .acc ol{margin:0;padding:0 0 22px 56px;display:grid;grid-template-columns:1fr 1fr;gap:8px 30px;font-size:15px;color:var(--body)}
 
 /* steps */
-.steps{background:#fff;overflow:hidden}
+.steps{}
 .steps .dots.y{left:0;bottom:60px;width:70px;height:120px}
-.steps .blob.r{right:-160px;top:-260px;width:300px;height:300px}
 .tl{position:relative;max-width:960px;margin:0 auto;display:grid;gap:26px}
 .tl:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:#DDD;transform:translateX(-50%)}
 .step{display:grid;grid-template-columns:1fr 72px 1fr;align-items:center}
@@ -229,7 +230,7 @@ h1{font-size:clamp(30px,3.6vw,46px);line-height:1.2;margin-bottom:24px}
 .person p{font-size:15px;color:var(--body)}
 
 /* cases */
-.cases{overflow:hidden}
+.cases{}
 .cases .dots.y{left:-150px;top:30px}
 .tcards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .tcard{background:#fff;border:1px solid var(--grey);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
@@ -262,7 +263,7 @@ h1{font-size:clamp(30px,3.6vw,46px);line-height:1.2;margin-bottom:24px}
 .faq .a{padding:0 0 22px;color:var(--body);font-size:15.5px;max-width:760px}
 
 /* order */
-.order{background:var(--yellow-soft);overflow:hidden;padding-bottom:64px}
+.order{background:var(--yellow-soft);padding-bottom:64px}
 .order-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,60px);align-items:center}
 .order h2{margin-bottom:22px;color:#fff}
 .order p{color:rgba(255,255,255,.9);font-size:16px}
@@ -356,7 +357,7 @@ body.review .tbc:hover:after{opacity:1}
   .acc summary .c{display:none}
   .person{grid-template-columns:72px 1fr}.person .ava{width:72px;height:72px;font-size:28px}
   .person .btn{grid-column:1/-1}
-  .who .blob.l,.inc .blob.r,.steps .blob.r{display:none}
+  .wave{display:none}
   .dots{display:none}
 }
 @media (max-width:640px){
@@ -404,7 +405,7 @@ body.review .tbc:hover:after{opacity:1}
 
 <!-- HERO -->
 <section class="hero">
-  <div class="blob l"></div>
+  <div class="wave l" aria-hidden="true"><svg viewBox="0 0 340 1500" preserveAspectRatio="none"><path d="M0 0 C 170 0, 340 120, 322 330 C 305 540, 120 580, 104 780 C 90 980, 215 1020, 200 1230 C 186 1420, 60 1455, 0 1500 Z"/></svg></div>
   <div class="wrap">
     <div class="dots r"></div>
     <nav class="crumbs" aria-label="Breadcrumb"><i></i><a href="https://www.miledevs.com/uk">Головна</a> / <a href="https://www.miledevs.com/pages/services">Послуги</a> / <span>Глибокий CRO та UI/UX аудит Shopify-магазину</span></nav>
@@ -488,7 +489,6 @@ body.review .tbc:hover:after{opacity:1}
 
 <!-- FOR WHOM -->
 <section class="who" id="who">
-  <div class="blob l"></div>
   <div class="wrap">
     <div class="dots r"></div>
     <div class="title"><h2>Для кого ця послуга?</h2></div>
@@ -516,7 +516,7 @@ body.review .tbc:hover:after{opacity:1}
 
 <!-- INCLUDED -->
 <section class="inc" id="included">
-  <div class="blob r"></div>
+  <div class="wave r" aria-hidden="true"><svg viewBox="0 0 300 1300" preserveAspectRatio="none"><path d="M300 0 C 200 20, 70 160, 80 400 C 90 620, 230 660, 218 840 C 206 1020, 110 1060, 130 1180 C 150 1260, 240 1280, 300 1300 Z"/></svg></div>
   <div class="wrap">
     <div class="dots y"></div>
     <div class="title"><h2>Що входить у послугу?</h2></div>
@@ -728,7 +728,6 @@ body.review .tbc:hover:after{opacity:1}
 
 <!-- STEPS -->
 <section class="steps" id="steps">
-  <div class="blob r"></div>
   <div class="wrap">
     <div class="dots y"></div>
     <div class="title"><h2>Етапи роботи</h2></div>
