@@ -704,7 +704,7 @@ footer{background:#fff;border-top:1px solid var(--grey);padding:34px 0 26px;colo
   }
   f.addEventListener('submit',function(e){
     e.preventDefault(); var text=build(); if(!text) return;
-    var done=function(){window.open('https://t.me/annserputko','_blank','noopener');ok.textContent='Текст заявки скопійовано — вставте його в чат Telegram, який щойно відкрився. Відповімо протягом години в робочий час.';ok.classList.add('show');};
+    var done=function(){window.open('https://t.me/annserputko?text='+encodeURIComponent(text),'_blank','noopener');ok.textContent='Відкрили Telegram із готовим текстом заявки — просто натисніть «Надіслати». Якщо текст не підставився, він уже скопійований: вставте його в чат. Відповімо протягом години в робочий час.';ok.classList.add('show');};
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,done);} else {done();}
   });
 })();
