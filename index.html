@@ -638,6 +638,7 @@ footer{background:#fff;border-top:1px solid var(--grey);padding:34px 0 26px;colo
           <input type="text" name="contact" placeholder="Telegram або телефон*" required>
           <input type="text" name="store" placeholder="Адреса сайту*" required>
         </div>
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0" aria-hidden="true">
         <button type="submit" class="btn orange">Отримати безкоштовний аудит</button>
         <p class="fine">Кнопка відкриває Telegram із готовим текстом заявки. Або напишіть нам напряму: <a href="https://t.me/annserputko" target="_blank" rel="noopener">@annserputko</a></p>
         <div class="ok" id="okMsg"></div>
@@ -704,8 +705,12 @@ footer{background:#fff;border-top:1px solid var(--grey);padding:34px 0 26px;colo
   }
   f.addEventListener('submit',function(e){
     e.preventDefault(); var text=build(); if(!text) return;
-    var done=function(){window.open('https://t.me/annserputko?text='+encodeURIComponent(text),'_blank','noopener');ok.textContent='Відкрили Telegram із готовим текстом заявки — просто натисніть «Надіслати». Якщо текст не підставився, він уже скопійований: вставте його в чат. Відповімо протягом години в робочий час.';ok.classList.add('show');};
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,done);} else {done();}
+    var d=new FormData(f); if(d.get('_honey')) return;
+    var btn=f.querySelector('button[type=submit]'); if(btn){btn.disabled=true;}
+    var payload={'Імʼя':(d.get('name')||'').trim(),'Контакт':(d.get('contact')||'').trim(),'Сайт':(d.get('store')||'').trim(),'Сторінка':location.href,_subject:'Нова заявка на безкоштовний CRO-аудит — MileDevs',_template:'table',_captcha:'false'};
+    var open=function(){window.open('https://t.me/annserputko?text='+encodeURIComponent(text),'_blank','noopener');ok.textContent='Заявку отримали. Відкрили Telegram із готовим текстом — натисніть «Надіслати», щоб ми відповіли швидше. Відповідаємо протягом години в робочий час.';ok.classList.add('show');if(btn){btn.disabled=false;}};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).catch(function(){});}
+    fetch('https://formsubmit.co/ajax/anyaserputko@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)}).then(function(){open();}).catch(function(){open();});
   });
 })();
 
