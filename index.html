@@ -364,6 +364,15 @@ footer{background:#fff;border-top:1px solid var(--grey);padding:34px 0 26px;colo
 .screen{position:absolute;top:8px;left:8px;right:8px;bottom:8px;height:auto}
 
 @media (max-width:1080px){.demo{grid-template-columns:1fr}.demo-phones{order:-1}}
+
+/* hero mock readability */
+.m-hero::before{background:linear-gradient(180deg,rgba(0,0,0,.2) 0%,rgba(0,0,0,.62) 40%,rgba(0,0,0,.9) 100%)}
+.m-hero h3{font-weight:600;text-shadow:0 1px 8px rgba(0,0,0,.7)}
+.m-hero p,.m-hero small{text-shadow:0 1px 6px rgba(0,0,0,.7);opacity:1}
+.m-chips span{background:rgba(0,0,0,.45);border-color:rgba(255,255,255,.7)}
+
+.m-hero h3,.m-hero p,.m-hero small,.m-chips span{color:#fff}
+.m-hero p{max-width:none;margin:0 0 1.1em}
 .rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
 .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}
